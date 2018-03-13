@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安装Linux/UNIX上安装MysqlLinux平台上推荐使用RPM包来安装Mysql,MySQL AB提供了以下RPM包的下载地址：    MySQL - MySQL服务器。你需要该选项，除非你只想连接运行在另一台机器上的MySQL服务器。 MySQL-client - MySQL 客户端程序，用于连接并操作Mysql服务器。 MySQL-devel - 库和包含文件，如果你想要编译其它MyS">
+<meta name="keywords" content="MySql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql-用法说明">
+<meta property="og:url" content="http://yoursite.com/2017/07/22/MySql-用法说明/index.html">
+<meta property="og:site_name" content="liang_henry&#39;s blog">
+<meta property="og:description" content="安装Linux/UNIX上安装MysqlLinux平台上推荐使用RPM包来安装Mysql,MySQL AB提供了以下RPM包的下载地址：    MySQL - MySQL服务器。你需要该选项，除非你只想连接运行在另一台机器上的MySQL服务器。 MySQL-client - MySQL 客户端程序，用于连接并操作Mysql服务器。 MySQL-devel - 库和包含文件，如果你想要编译其它MyS">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T06:39:56.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySql-用法说明">
+<meta name="twitter:description" content="安装Linux/UNIX上安装MysqlLinux平台上推荐使用RPM包来安装Mysql,MySQL AB提供了以下RPM包的下载地址：    MySQL - MySQL服务器。你需要该选项，除非你只想连接运行在另一台机器上的MySQL服务器。 MySQL-client - MySQL 客户端程序，用于连接并操作Mysql服务器。 MySQL-devel - 库和包含文件，如果你想要编译其它MyS">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/22/MySql-用法说明/"/>
+
+
+
+
+
+  <title>MySql-用法说明 | liang_henry's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liang_henry's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/22/MySql-用法说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liang_henry's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySql-用法说明</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T10:28:42+00:00">
+                2017-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="Linux-UNIX上安装Mysql"><a href="#Linux-UNIX上安装Mysql" class="headerlink" title="Linux/UNIX上安装Mysql"></a>Linux/UNIX上安装Mysql</h2><p>Linux平台上推荐使用RPM包来安装Mysql,MySQL AB提供了以下RPM包的下载地址：  </p>
+<ul>
+<li>MySQL - MySQL服务器。你需要该选项，除非你只想连接运行在另一台机器上的MySQL服务器。</li>
+<li>MySQL-client - MySQL 客户端程序，用于连接并操作Mysql服务器。</li>
+<li>MySQL-devel - 库和包含文件，如果你想要编译其它MySQL客户端，例如Perl模块，则需要安装该RPM包。</li>
+<li>MySQL-shared - 该软件包包含某些语言和应用程序需要动态装载的共享库(libmysqlclient.so*)，使用MySQL。</li>
+<li>MySQL-bench - MySQL数据库服务器的基准和性能测试工具。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Centos-系统下使用-yum-命令安装-MySql："><a href="#Centos-系统下使用-yum-命令安装-MySql：" class="headerlink" title="Centos 系统下使用 yum 命令安装 MySql："></a>Centos 系统下使用 yum 命令安装 MySql：</h2><p>检测系统是否自带安装 mysql: <code>rpm -qa | grep mysql</code><br>如果你系统有安装，那可以选择进行卸载: <code>rpm -e mysql</code>,强力删除<code>rpm -e --nodeps mysql</code><br>安装mysql：<br><code>yum install mysql</code><br><code>yum install mysql-server</code><br><code>yum install mysql-devel</code><br>启动mysql：<code>service mysqld start</code><br>查看mysql版本号：mysqladmin –version</p>
+<h2 id="window上查看mysql"><a href="#window上查看mysql" class="headerlink" title="window上查看mysql"></a>window上查看mysql</h2><p><code>mysqld.exe --console</code></p>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="简单的命令"><a href="#简单的命令" class="headerlink" title="简单的命令"></a>简单的命令</h2><ol>
+<li>连接服务器 <code>mysql</code></li>
+<li>显示数据库信息 <code>show databases</code></li>
+<li>设置密码 <code>mysqladmin -u root password &quot;new_password&quot;</code></li>
+<li>登录附加密码<code>mysql -u root -p</code></li>
+<li>查看服务是否启动<code>ps -ef | grep mysqld</code></li>
+<li>启动mysql服务器<code>./mysql_safe &amp;</code></li>
+<li>关闭mysql服务器<code>./mysqladmin -u root -p shutdown</code></li>
+<li>切换数据库<code>use mysql</code></li>
+<li>重新载入授权表<code>FLUSH PRIVILEGES</code></li>
+<li>给指定数据库添加用户 <code>GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON TUTORIALS.* TO &#39;liang&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;hello&#39;</code></li>
+<li>显示表<code>SHOW TABLES</code></li>
+<li>显示表结构<code>SHOW COLUMNS FROM table</code></li>
+<li>显示数据表的详细索引信息<code>SHOW INDEX FROM table</code></li>
+<li>数据库性能<code>SHOW TABLE STATUS LIKE [FROM db_name] [LIKE &#39;pattern&#39;] \G</code></li>
+<li>用户退出<code>exit</code></li>
+<li>创建数据库<code>mysqladmin -u root -p create hello</code></li>
+<li>删除数据库<code>mysqladmin -u root -p drop hello</code></li>
+</ol>
+<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p><code>CREATE TABLE table_name (column_name column_type)</code><br>示例解析<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `t_tbl`(</span><br><span class="line">   `t_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `t_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `t_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `t_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure></p>
+<p>实例解析：  </p>
+<ul>
+<li>如果你不想字段为<code>NULL</code>可以设置字段的属性为<code>NOT NULL</code>，在操作数据库时如果输入该字段的数据为<code>NULL</code>，就会报错。</li>
+<li><code>AUTO_INCREMENT</code>定义列为自增的属性，一般用于主键，数值会自动加1。</li>
+<li><code>PRIMARY KEY</code>关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
+<li><code>ENGINE</code>设置存储引擎，<code>CHARSET</code>设置编码。</li>
+<li>MySQL命令终止符为分号 (;)   </li>
+</ul>
+<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><p><code>drop table t_tbl</code></p>
+<h3 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h3><p><code>ALTER TABLE t_tbl  DROP i</code></p>
+<h3 id="添加列"><a href="#添加列" class="headerlink" title="添加列"></a>添加列</h3><p><code>ALTER TABLE t_tbl ADD i INT [FIRST] [AFTER a]</code></p>
+<h3 id="修改列"><a href="#修改列" class="headerlink" title="修改列"></a>修改列</h3><p><code>ALTER TABLE t_tbl MODIFY c CHAR(10) [not null] [default];</code><br><code>ALTER TABLE t_tbl CHANGE i j BIGINT;</code><br><code>ALTER TABLE t_tbl CHANGE j j INT</code>  </p>
+<h3 id="修改默认值"><a href="#修改默认值" class="headerlink" title="修改默认值"></a>修改默认值</h3><p><code>ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000</code><br><code>ALTER TABLE testalter_tbl ALTER i DROP DEFAULT</code></p>
+<h3 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h3><p><code>ALTER TABLE testalter_tbl RENAME TO alter_tbl</code></p>
+<h3 id="修改存储索引"><a href="#修改存储索引" class="headerlink" title="修改存储索引"></a>修改存储索引</h3><p><code>alter table tableName engine=myisam</code></p>
+<h3 id="删除外键约束"><a href="#删除外键约束" class="headerlink" title="删除外键约束"></a>删除外键约束</h3><p><code>alter table tableName drop foreign key keyName</code></p>
+<h3 id="修改位置"><a href="#修改位置" class="headerlink" title="修改位置"></a>修改位置</h3><p><code>alter table tableName modify name1 type1 first|after name2</code></p>
+<h3 id="索引操作"><a href="#索引操作" class="headerlink" title="索引操作"></a>索引操作</h3><ol>
+<li>创建索引<code>CREATE INDEX indexName ON mytable(username(length))</code>;</li>
+<li>修改索引<code>ALTER mytable ADD INDEX [indexName] ON (username(length))</code></li>
+<li>创建表时直接增加索引<code>CREATE TABLE mytable(username VARCHAR(16) NOT NULL,INDEX [indexName] (username(length)))</code></li>
+<li>删除索引<code>DROP INDEX [indexName] ON mytable</code></li>
+<li>创建唯一索引<code>CREATE UNIQUE INDEX indexName ON mytable(username(length))</code></li>
+<li>修改唯一索引<code>ALTER table mytable ADD UNIQUE [indexName] (username(length))</code></li>
+<li>创建表时直接创建唯一索引<code>CREATE TABLE mytable(username VARCHAR(16) NOT NULL,UNIQUE [indexName] (username(length)))</code></li>
+<li>添加和删除索引<br> 8.1. <code>ALTER TABLE tbl_name ADD PRIMARY KEY (column_list)</code>: 该语句添加一个主键，这意味着索引值必须是唯一的，且不能为NULL。<br> 8.2. <code>ALTER TABLE tbl_name ADD UNIQUE index_name (column_list)</code>: 这条语句创建索引的值必须是唯一的（除了NULL外，NULL可能会出现多次）<br> 8.3. <code>ALTER TABLE tbl_name ADD INDEX index_name (column_list)</code>: 添加普通索引，索引值可出现多次<br> 8.4. <code>ALTER TABLE tbl_name ADD FULLTEXT index_name (column_list)</code>:该语句指定了索引为 FULLTEXT ，用于全文索引  </li>
+<li>添加和删除主键<br> 9.1. <code>ALTER TABLE testalter_tbl MODIFY i INT NOT NULL;</code>添加主键索引时<br> 9.2. <code>ALTER TABLE testalter_tbl ADD PRIMARY KEY (i)</code>添加主键索引时<br> 9.3. <code>ALTER TABLE testalter_tbl DROP PRIMARY KEY</code>删除主键</li>
+<li>显示索引 <code>SHOW INDEX FROM table_name; \G</code>  </li>
+</ol>
+<h2 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h2><ol>
+<li>插入数据:<code>INSERT INTO table_name ( field1, field2,...fieldN ) VALUES ( value1, value2,...valueN );</code></li>
+<li>查询数据:<code>SELECT column_name,column_name FROM table_name [WHERE Clause] [OFFSET M ] [LIMIT N]</code></li>
+<li>更新数据:<code>UPDATE table_name SET field1=new-value1, field2=new-value2 [WHERE Clause]</code></li>
+<li>删除数据:<code>DELETE FROM table_name [WHERE Clause]</code></li>
+<li>模糊查询:<code>SELECT * FROM table_name WHERE field1 LIKE condition1 [AND [OR]] filed2 = &#39;somevalue&#39;</code></li>
+<li>连接查询结果:<code>SELECT * FROM tables  UNION [ALL | DISTINCT] SELECT * FROM tables</code></li>
+<li>排序:<code>SELECT fieldN table_name1ORDER BY field1 [ASC [DESC]]</code></li>
+<li>分组:<code>SELECT column_name, function(column_name) FROM table_name WHERE column_name operator value GROUP BY column_name;</code></li>
+<li>内外连接<br>9.1 INNER JOIN（内连接,或等值连接）：获取两个表中字段匹配关系的记录<br>9.2 LEFT JOIN（左连接）：获取左表所有记录，即使右表没有对应匹配的记录<br>9.3 RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录</li>
+<li>空值判断:<code>is null</code> <code>is not null</code> <code>null &lt;=&gt; null</code> is true <code>null=null</code> is false.</li>
+<li>正则表达式:`SELECT * FROM table_name WHERE field1 REGEXP ‘mar’</li>
+</ol>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">大小</th>
+<th style="text-align:left">范围（有符号）</th>
+<th style="text-align:left">范围（无符号）</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TINYINT</td>
+<td style="text-align:left">1 字节</td>
+<td style="text-align:left">(-128，127)</td>
+<td style="text-align:left">(0，255)</td>
+<td style="text-align:left">小整数值</td>
+</tr>
+<tr>
+<td style="text-align:left">SMALLINT</td>
+<td style="text-align:left">2 字节</td>
+<td style="text-align:left">(-32,768，32,767)</td>
+<td style="text-align:left">(0，65 535)</td>
+<td style="text-align:left">大整数值</td>
+</tr>
+<tr>
+<td style="text-align:left">MEDIUMINT</td>
+<td style="text-align:left">3 字节</td>
+<td style="text-align:left">(-8,388,608，8 388 607)</td>
+<td style="text-align:left">(0，16 777 215)</td>
+<td style="text-align:left">大整数值</td>
+</tr>
+<tr>
+<td style="text-align:left">INT或INTEGER</td>
+<td style="text-align:left">4 字节</td>
+<td style="text-align:left">(-2,147,483,648，2,147,483,647)</td>
+<td style="text-align:left">(0，4 294 967 295)</td>
+<td style="text-align:left">大整数值</td>
+</tr>
+<tr>
+<td style="text-align:left">BIGINT</td>
+<td style="text-align:left">8 字节</td>
+<td style="text-align:left">(-9,233,372,036,854,775,808，<br>9,223,372,036,854,775,807)</td>
+<td style="text-align:left">(0，18 446 744 073 709 551 615)</td>
+<td style="text-align:left">极大整数值</td>
+</tr>
+<tr>
+<td style="text-align:left">FLOAT</td>
+<td style="text-align:left">4 字节</td>
+<td style="text-align:left">(-3.402 823 466 E+38<br>，-1.175 494 351 E-38)，<br>0，(1.175 494 351 E-38，<br>3.402 823 466 351 E+38)</td>
+<td style="text-align:left">约值0，(1.175 E-38，<br>3.402 E+38)</td>
+<td style="text-align:left">单精度浮点数值</td>
+</tr>
+<tr>
+<td style="text-align:left">DOUBLE</td>
+<td style="text-align:left">8 字节</td>
+<td style="text-align:left">约值(-1.797 E+308，<br>-2.225 E-308)，0，<br>(2.225 E-308，<br>1.797 E+308)</td>
+<td style="text-align:left">约值0，(2.225 E-308，<br>1.797 E+308)</td>
+<td style="text-align:left">双精度浮点数值</td>
+</tr>
+<tr>
+<td style="text-align:left">DECIMAL</td>
+<td style="text-align:left">对DECIMAL(M,D) ，<br>如果M&gt;D，<br>为M+2否则为D+2</td>
+<td style="text-align:left">依赖于M和D的值</td>
+<td style="text-align:left">依赖于M和D的值</td>
+<td style="text-align:left">小数值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">大小(字节)</th>
+<th style="text-align:left">范围</th>
+<th style="text-align:left">格式</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">DATE</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">1000-01-01/9999-12-31</td>
+<td style="text-align:left">YYYY-MM-DD</td>
+<td style="text-align:left">日期值</td>
+</tr>
+<tr>
+<td style="text-align:left">TIME</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">‘-838:59:59’<br>‘838:59:59’</td>
+<td style="text-align:left">HH:MM:SS</td>
+<td style="text-align:left">时间值或持续时间</td>
+</tr>
+<tr>
+<td style="text-align:left">YEAR</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1901/2155</td>
+<td style="text-align:left">YYYY</td>
+<td style="text-align:left">年份值</td>
+</tr>
+<tr>
+<td style="text-align:left">DATETIME</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left">1000-01-01 00:00:00<br>9999-12-31 23:59:59</td>
+<td style="text-align:left">YYYY-MM-DD HH:MM:SS</td>
+<td style="text-align:left">混合日期和时间值</td>
+</tr>
+<tr>
+<td style="text-align:left">TIMESTAMP</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">1970-01-01 00:00:00<br>2037 年某时</td>
+<td style="text-align:left">YYYYMMDD HHMMSS</td>
+<td style="text-align:left">混合日期和时间值，时间戳</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">大小</th>
+<th style="text-align:left">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CHAR</td>
+<td style="text-align:left">0-255字节</td>
+<td style="text-align:left">定长字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">VARCHAR</td>
+<td style="text-align:left">0-65535 字节</td>
+<td style="text-align:left">变长字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">TINYBLOB</td>
+<td style="text-align:left">0-255字节</td>
+<td style="text-align:left">不超过 255 个字符的二进制字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">TINYTEXT</td>
+<td style="text-align:left">0-255字节</td>
+<td style="text-align:left">短文本字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">BLOB</td>
+<td style="text-align:left">0-65 535字节</td>
+<td style="text-align:left">二进制形式的长文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">TEXT</td>
+<td style="text-align:left">0-65 535字节</td>
+<td style="text-align:left">长文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">MEDIUMBLOB</td>
+<td style="text-align:left">0-16 777 215字节</td>
+<td style="text-align:left">二进制形式的中等长度文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">MEDIUMTEXT</td>
+<td style="text-align:left">0-16 777 215字节</td>
+<td style="text-align:left">中等长度文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">LONGBLOB</td>
+<td style="text-align:left">0-4 294 967 295字节</td>
+<td style="text-align:left">二进制形式的极大文本数据</td>
+</tr>
+<tr>
+<td style="text-align:left">LONGTEXT</td>
+<td style="text-align:left">0-4 294 967 295字节</td>
+<td style="text-align:left">极大文本数据</td>
+</tr>
+</tbody>
+</table>
+<p>说明:<br>CHAR和VARCHAR类型类似，但它们保存和检索的方式不同。它们的最大长度和是否尾部空格被保留等方面也不同。在存储或检索过程中不进行大小写转换。<br>BINARY和VARBINARY类类似于CHAR和VARCHAR，不同的是它们包含二进制字符串而不要非二进制字符串。也就是说，它们包含字节字符串而不是字符字符串。这说明它们没有字符集，并且排序和比较基于列值字节的数值值。<br>BLOB是一个二进制大对象，可以容纳可变数量的数据。有4种BLOB类型：TINYBLOB、BLOB、MEDIUMBLOB和LONGBLOB。它们只是可容纳值的最大长度不同。<br>有4种TEXT类型：TINYTEXT、TEXT、MEDIUMTEXT和LONGTEXT。这些对应4种BLOB类型，有相同的最大长度和存储需求。   </p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">模式</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">^</td>
+<td style="text-align:left">匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置。</td>
+</tr>
+<tr>
+<td style="text-align:left">\$</td>
+<td style="text-align:left">匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置。</td>
+</tr>
+<tr>
+<td style="text-align:left">.</td>
+<td style="text-align:left">匹配除 “\n” 之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，请使用象 ‘[.\n]’ 的模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">[…]</td>
+<td style="text-align:left">字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。</td>
+</tr>
+<tr>
+<td style="text-align:left">[^…]</td>
+<td style="text-align:left">负值字符集合。匹配未包含的任意字符。例如， ‘[^abc]’ 可以匹配 “plain” 中的’p’。</td>
+</tr>
+<tr>
+<td style="text-align:left">p1｜p2｜p3</td>
+<td style="text-align:left">匹配 p1 或 p2 或 p3。例如，<code>&#39;z｜food&#39;</code> 能匹配 “z” 或 “food”。<code>&#39;(z｜f)ood&#39;</code> 则匹配 “zood” 或 “food”。</td>
+</tr>
+<tr>
+<td style="text-align:left">*</td>
+<td style="text-align:left">匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
+</tr>
+<tr>
+<td style="text-align:left">+</td>
+<td style="text-align:left">匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+</tr>
+<tr>
+<td style="text-align:left">{n}</td>
+<td style="text-align:left">n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td style="text-align:left">{n,m}</td>
+<td style="text-align:left">m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="mysql事物"><a href="#mysql事物" class="headerlink" title="mysql事物"></a>mysql事物</h1><p> MySQL 事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务！</p>
+<ul>
+<li>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。</li>
+<li>事务处理可以用来维护数据库的完整性，保证成批的 SQL 语句要么全部执行，要么全部不执行。</li>
+<li>事务用来管理 insert,update,delete 语句</li>
+</ul>
+<p>一般来说，事务是必须满足4个条件（ACID）： Atomicity（原子性）、Consistency（稳定性）、Isolation（隔离性）、Durability（可靠性）</p>
+<ol>
+<li>事务的原子性：一组事务，要么成功；要么撤回。  </li>
+<li>稳定性:有非法数据（外键约束之类），事务撤回。</li>
+<li>隔离性:事务独立运行。一个事务处理后的结果，影响了其他事务，那么其他事务会撤回。事务的100%隔离，需要牺牲速度。</li>
+<li>可靠性:软、硬件崩溃后，InnoDB数据表驱动会利用日志文件重构修改。可靠性和高速度不可兼得， <code>innodb_flush_log_at_trx_commit</code> 选项 决定什么时候吧事务保存到日志里。</li>
+</ol>
+<blockquote>
+<p>在 MySQL 命令行的默认设置下，事务都是自动提交的，<br>即执行 SQL 语句后就会马上执行 COMMIT 操作。<br>因此要显式地开启一个事务务须使用命令 BEGIN 或 START TRANSACTION，<br>或者执行命令 SET AUTOCOMMIT=0，用来禁止使用当前会话的自动提交。</p>
+</blockquote>
+<h2 id="事物控制语句："><a href="#事物控制语句：" class="headerlink" title="事物控制语句："></a>事物控制语句：</h2><ul>
+<li>BEGIN或START TRANSACTION；显式地开启一个事务；</li>
+<li>COMMIT；也可以使用COMMIT WORK，不过二者是等价的。COMMIT会提交事务，并使已对数据库进行的所有修改称为永久性的；</li>
+<li>ROLLBACK；有可以使用ROLLBACK WORK，不过二者是等价的。回滚会结束用户的事务，并撤销正在进行的所有未提交的修改；</li>
+<li>SAVEPOINT identifier；SAVEPOINT允许在事务中创建一个保存点，一个事务中可以有多个SAVEPOINT；</li>
+<li>RELEASE SAVEPOINT identifier；删除一个事务的保存点，当没有指定的保存点时，执行该语句会抛出一个异常；</li>
+<li>ROLLBACK TO identifier；把事务回滚到标记点；</li>
+<li>SET TRANSACTION；用来设置事务的隔离级别。InnoDB存储引擎提供事务的隔离级别有READ UNCOMMITTED、READ COMMITTED、REPEATABLE READ和SERIALIZABLE。</li>
+</ul>
+<h2 id="MYSQL-事务处理主要有两种方法："><a href="#MYSQL-事务处理主要有两种方法：" class="headerlink" title="MYSQL 事务处理主要有两种方法："></a>MYSQL 事务处理主要有两种方法：</h2><p>1、用 BEGIN, ROLLBACK, COMMIT来实现</p>
+<ul>
+<li>BEGIN 开始一个事务</li>
+<li>ROLLBACK 事务回滚</li>
+<li>COMMIT 事务确认</li>
+</ul>
+<p>2、直接用 SET 来改变 MySQL 的自动提交模式:</p>
+<ul>
+<li>SET AUTOCOMMIT=0 禁止自动提交</li>
+<li>SET AUTOCOMMIT=1 开启自动提交</li>
+</ul>
+<h1 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySql/" rel="tag"># MySql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/22/Redis-使用说明/" rel="next" title="Redis-使用说明">
+                <i class="fa fa-chevron-left"></i> Redis-使用说明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhaoliang</p>
+              <p class="site-description motion-element" itemprop="description">有些事并不是看到希望才去坚持，而是坚持了才会看到希望</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liangHenry" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cczhaoliang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/liang_henry" target="_blank" title="csdn">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>csdn</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-UNIX上安装Mysql"><span class="nav-number">1.1.</span> <span class="nav-text">Linux/UNIX上安装Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Centos-系统下使用-yum-命令安装-MySql："><span class="nav-number">1.2.</span> <span class="nav-text">Centos 系统下使用 yum 命令安装 MySql：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window上查看mysql"><span class="nav-number">1.3.</span> <span class="nav-text">window上查看mysql</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命令"><span class="nav-number">2.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的命令"><span class="nav-number">2.1.</span> <span class="nav-text">简单的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表操作"><span class="nav-number">2.2.</span> <span class="nav-text">表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表"><span class="nav-number">2.2.2.</span> <span class="nav-text">删除表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除列"><span class="nav-number">2.2.3.</span> <span class="nav-text">删除列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加列"><span class="nav-number">2.2.4.</span> <span class="nav-text">添加列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改列"><span class="nav-number">2.2.5.</span> <span class="nav-text">修改列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改默认值"><span class="nav-number">2.2.6.</span> <span class="nav-text">修改默认值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表名"><span class="nav-number">2.2.7.</span> <span class="nav-text">修改表名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改存储索引"><span class="nav-number">2.2.8.</span> <span class="nav-text">修改存储索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除外键约束"><span class="nav-number">2.2.9.</span> <span class="nav-text">删除外键约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改位置"><span class="nav-number">2.2.10.</span> <span class="nav-text">修改位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引操作"><span class="nav-number">2.2.11.</span> <span class="nav-text">索引操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据操作"><span class="nav-number">2.3.</span> <span class="nav-text">数据操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数值类型"><span class="nav-number">3.1.</span> <span class="nav-text">数值类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期和时间类型"><span class="nav-number">3.2.</span> <span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串类型"><span class="nav-number">3.3.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">3.4.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql事物"><span class="nav-number">4.</span> <span class="nav-text">mysql事物</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事物控制语句："><span class="nav-number">4.1.</span> <span class="nav-text">事物控制语句：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL-事务处理主要有两种方法："><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL 事务处理主要有两种方法：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#临时表"><span class="nav-number">5.</span> <span class="nav-text">临时表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhaoliang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

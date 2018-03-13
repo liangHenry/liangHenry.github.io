@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="常用命令安装Rediswin:官网下载，直接安装。linux:1234wget http://download.redis.io/releases/redis-2.8.17.tar.gztar xzf redis-2.8.17.tar.gzcd redis-2.8.17make">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis-使用说明">
+<meta property="og:url" content="http://yoursite.com/2017/07/22/Redis-使用说明/index.html">
+<meta property="og:site_name" content="liang_henry&#39;s blog">
+<meta property="og:description" content="常用命令安装Rediswin:官网下载，直接安装。linux:1234wget http://download.redis.io/releases/redis-2.8.17.tar.gztar xzf redis-2.8.17.tar.gzcd redis-2.8.17make">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/07/22/Redis-使用说明/%22http://www.runoob.com/wp-content/uploads/2014/11/pubsub1.png%22">
+<meta property="og:image" content="http://yoursite.com/2017/07/22/Redis-使用说明/%22http://www.runoob.com/wp-content/uploads/2014/11/pubsub2.png%22">
+<meta property="og:updated_time" content="2018-03-13T06:39:56.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis-使用说明">
+<meta name="twitter:description" content="常用命令安装Rediswin:官网下载，直接安装。linux:1234wget http://download.redis.io/releases/redis-2.8.17.tar.gztar xzf redis-2.8.17.tar.gzcd redis-2.8.17make">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/22/Redis-使用说明/%22http://www.runoob.com/wp-content/uploads/2014/11/pubsub1.png%22">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/22/Redis-使用说明/"/>
+
+
+
+
+
+  <title>Redis-使用说明 | liang_henry's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liang_henry's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/22/Redis-使用说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liang_henry's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis-使用说明</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T10:18:36+00:00">
+                2017-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h2><p>win:官网下载，直接安装。<br>linux:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.17.tar.gz</span><br><span class="line">tar xzf redis-2.8.17.tar.gz</span><br><span class="line">cd redis-2.8.17</span><br><span class="line">make</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>ubuntu:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install redis-server</span><br></pre></td></tr></table></figure></p>
+<h2 id="运行服务器"><a href="#运行服务器" class="headerlink" title="运行服务器"></a>运行服务器</h2><p>win:<code>redis-server.exe redis.windows.conf</code><br>linux:<code>./redis-server redis.conf</code><br>Ubuntu:<code>redis-server</code><br>mac:<code>redis-server</code></p>
+<h2 id="运行redis客户端"><a href="#运行redis客户端" class="headerlink" title="运行redis客户端"></a>运行redis客户端</h2><p>win:<code>redis-cli.exe -h 127.0.0.1 -p 6379</code><br>linux:<code>./redis-cli</code><br>Ubuntu:<code>redis-cli</code><br>Ubuntu:<code>redis-cli</code></p>
+<h1 id="配置设置"><a href="#配置设置" class="headerlink" title="配置设置"></a>配置设置</h1><h2 id="CONFIG-GET-CONFIG-SETTING-NAME"><a href="#CONFIG-GET-CONFIG-SETTING-NAME" class="headerlink" title="CONFIG GET CONFIG_SETTING_NAME"></a><code>CONFIG GET CONFIG_SETTING_NAME</code></h2><p>通过 CONFIG 命令查看或设置配置项,使用<code>*</code>号获取所有配置项</p>
+<h2 id="CONFIG-SET-CONFIG-SETTING-NAME-NEW-CONFIG-VALUE"><a href="#CONFIG-SET-CONFIG-SETTING-NAME-NEW-CONFIG-VALUE" class="headerlink" title="CONFIG SET CONFIG_SETTING_NAME NEW_CONFIG_VALUE"></a><code>CONFIG SET CONFIG_SETTING_NAME NEW_CONFIG_VALUE</code></h2><p>修改配置使用 CONFIG set 命令来修改配置，或者修改 redis.conf 文件</p>
+<h2 id="配置内容详细介绍："><a href="#配置内容详细介绍：" class="headerlink" title="配置内容详细介绍："></a>配置内容详细介绍：</h2><p>redis.conf 配置项说明如下：</p>
+<ol>
+<li><p>Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程<br><code>daemonize no</code>  </p>
+</li>
+<li><p>当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定<br><code>pidfile /var/run/redis.pid</code>  </p>
+</li>
+<li><p>指定Redis监听端口，默认端口为6379，作者在自己的一篇博文中解释了为什么选用6379作为默认端口，因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字<br><code>port 6379</code>  </p>
+</li>
+<li><p>绑定的主机地址<br><code>bind 127.0.0.1</code>  </p>
+</li>
+<li><p>当 客户端闲置多长时间后关闭连接，如果指定为0，表示关闭该功能<br><code>timeout 300</code>  </p>
+</li>
+<li><p>指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose<br><code>loglevel verbose</code></p>
+</li>
+<li><p>日志记录方式，默认为标准输出，如果配置Redis为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给/dev/null<br><code>logfile stdout</code>  </p>
+</li>
+<li><p>设置数据库的数量，默认数据库为0，可以使用SELECT <dbid>命令在连接上指定数据库id<br><code>databases 16</code></dbid></p>
+</li>
+<li><p>指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合<br><code>save &lt;seconds&gt; &lt;changes&gt;</code><br>Redis默认配置文件中提供了三个条件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>分别表示900秒（15分钟）内有1个更改，300秒（5分钟）内有10个更改以及60秒内有10000个更改。</p>
+<ol>
+<li><p>指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，如果为了节省CPU时间，可以关闭该选项，但会导致数据库文件变的巨大<br><code>rdbcompression yes</code></p>
+</li>
+<li><p>指定本地数据库文件名，默认值为dump.rdb<br><code>dbfilename dump.rdb</code></p>
+</li>
+<li><p>指定本地数据库存放目录<br><code>dir ./</code>  </p>
+</li>
+<li><p>设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步<br><code>slaveof &lt;masterip&gt; &lt;masterport&gt;</code>  </p>
+</li>
+<li><p>当master服务设置了密码保护时，slav服务连接master的密码<br><code>masterauth &lt;master-password&gt;</code>  </p>
+</li>
+<li><p>设置Redis连接密码，如果配置了连接密码，客户端在连接Redis时需要通过<code>AUTH &lt;password&gt;</code>命令提供密码，默认关闭<br><code>requirepass foobared</code>  </p>
+</li>
+<li><p>设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，如果设置<code>maxclients 0</code>，表示不作限制。当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回<code>max number of clients reached</code>错误信息<br><code>maxclients 128</code>   </p>
+</li>
+<li><p>指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key，当此方法处理 后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis新的vm机制，会把Key存放内存，Value会存放在swap区<br><code>maxmemory &lt;bytes&gt;</code>  </p>
+</li>
+<li><p>指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no<br><code>appendonly no</code>  </p>
+</li>
+<li><p>指定更新日志文件名，默认为appendonly.aof<br><code>appendfilename appendonly.aof</code>  </p>
+</li>
+<li><p>指定更新日志条件，共有3个可选值：</p>
+</li>
+</ol>
+<ul>
+<li>no:表示等操作系统进行数据缓存同步到磁盘（快）  </li>
+<li>always:表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全）  </li>
+<li>everysec:表示每秒同步一次（折衷，默认值）<br><code>appendfsync everysec</code>  </li>
+</ul>
+<ol>
+<li><p>指定是否启用虚拟内存机制，默认值为no，简单的介绍一下，VM机制将数据分页存放，由Redis将访问量较少的页即冷数据swap到磁盘上，访问多的页面由磁盘自动换出到内存中（在后面的文章我会仔细分析Redis的VM机制）<br><code>vm-enabled no</code>  </p>
+</li>
+<li><p>虚拟内存文件路径，默认值为/tmp/redis.swap，不可多个Redis实例共享<br><code>vm-swap-file /tmp/redis.swap</code>  </p>
+</li>
+<li><p>将所有大于vm-max-memory的数据存入虚拟内存,无论vm-max-memory设置多小,所有索引数据都是内存存储的(Redis的索引数据 就是keys),也就是说,当vm-max-memory设置为0的时候,其实是所有value都存在于磁盘。默认值为0<br><code>vm-max-memory 0</code>  </p>
+</li>
+<li><p>Redis swap文件分成了很多的page，一个对象可以保存在多个page上面，但一个page上不能被多个对象共享，vm-page-size是要根据存储的 数据大小来设定的，作者建议如果存储很多小对象，page大小最好设置为32或者64bytes；如果存储很大大对象，则可以使用更大的page，如果不 确定，就使用默认值<br><code>vm-page-size 32</code>   </p>
+</li>
+<li><p>设置swap文件中的page数量，由于页表（一种表示页面空闲或使用的bitmap）是在放在内存中的，在磁盘上每8个pages将消耗1byte的内存。<br><code>vm-pages 134217728</code>  </p>
+</li>
+<li><p>设置访问swap文件的线程数,最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的，可能会造成比较长时间的延迟。默认值为4<br><code>vm-max-threads 4</code>  </p>
+</li>
+<li><p>设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启<br><code>glueoutputbuf yes</code>  </p>
+</li>
+<li><p>指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法<br><code>hash-max-zipmap-entries 64</code><br><code>hash-max-zipmap-value 512</code>  </p>
+</li>
+<li><p>指定是否激活重置哈希，默认为开启（后面在介绍Redis的哈希算法时具体介绍）<br><code>activerehashing yes</code>  </p>
+</li>
+<li><p>指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件<br><code>include /path/to/local.conf</code>  </p>
+</li>
+</ol>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="string-字符串"><a href="#string-字符串" class="headerlink" title="string (字符串)"></a>string (字符串)</h2><p>string类型是二进制安全的。redis的string可以包含任何数据。比如j图片.string类型是Redis最基本的数据类型，一个键最大能存储512MB。</p>
+<h3 id="设置key的值"><a href="#设置key的值" class="headerlink" title="设置key的值"></a>设置key的值</h3><p><code>SET key &quot;value&quot;</code></p>
+<h3 id="获取key的值"><a href="#获取key的值" class="headerlink" title="获取key的值"></a>获取key的值</h3><p><code>GET key</code>  </p>
+<h3 id="截取返回字符"><a href="#截取返回字符" class="headerlink" title="截取返回字符"></a>截取返回字符</h3><p><code>GETRANGE key start end</code></p>
+<h3 id="设置key的值并返回old-value"><a href="#设置key的值并返回old-value" class="headerlink" title="设置key的值并返回old value"></a>设置key的值并返回old value</h3><p><code>GETSET key value</code></p>
+<h3 id="获取指定偏移量"><a href="#获取指定偏移量" class="headerlink" title="获取指定偏移量"></a>获取指定偏移量</h3><p><code>GETBIT key offset</code></p>
+<h3 id="获取所有key的值"><a href="#获取所有key的值" class="headerlink" title="获取所有key的值"></a>获取所有key的值</h3><p><code>MGET key1 [key2..]</code></p>
+<h3 id="设置或清除指定偏移量"><a href="#设置或清除指定偏移量" class="headerlink" title="设置或清除指定偏移量"></a>设置或清除指定偏移量</h3><p><code>SETBIT key offset value</code></p>
+<h3 id="过期时间"><a href="#过期时间" class="headerlink" title="过期时间"></a>过期时间</h3><p><code>SETEX key seconds value</code></p>
+<h3 id="key不存在时设置"><a href="#key不存在时设置" class="headerlink" title="key不存在时设置"></a>key不存在时设置</h3><p><code>SETNX key value</code></p>
+<h3 id="覆写key储存的字符串值"><a href="#覆写key储存的字符串值" class="headerlink" title="覆写key储存的字符串值"></a>覆写key储存的字符串值</h3><p><code>SETRANGE key offset value</code></p>
+<h3 id="字符串值的长度"><a href="#字符串值的长度" class="headerlink" title="字符串值的长度"></a>字符串值的长度</h3><p><code>STRLEN key</code></p>
+<h3 id="设置多个key-value"><a href="#设置多个key-value" class="headerlink" title="设置多个key-value"></a>设置多个key-value</h3><p><code>MSET key value [key value ...]</code></p>
+<h3 id="设置多个不存在key-value"><a href="#设置多个不存在key-value" class="headerlink" title="设置多个不存在key-value"></a>设置多个不存在key-value</h3><p><code>MSETNX key value [key value ...]</code></p>
+<h3 id="增加毫秒生存时间"><a href="#增加毫秒生存时间" class="headerlink" title="增加毫秒生存时间"></a>增加毫秒生存时间</h3><p><code>PSETEX key milliseconds value</code></p>
+<h3 id="value-1"><a href="#value-1" class="headerlink" title="value+1"></a>value+1</h3><p><code>INCR key</code></p>
+<h3 id="value-加上给定的增量值"><a href="#value-加上给定的增量值" class="headerlink" title="value 加上给定的增量值"></a>value 加上给定的增量值</h3><p><code>INCRBY key increment</code></p>
+<h3 id="value-加上浮点增量值"><a href="#value-加上浮点增量值" class="headerlink" title="value 加上浮点增量值"></a>value 加上浮点增量值</h3><p><code>INCRBYFLOAT key increment</code></p>
+<h3 id="value-1-1"><a href="#value-1-1" class="headerlink" title="value-1"></a>value-1</h3><p><code>DECR key</code></p>
+<h3 id="value减去给定的减量值"><a href="#value减去给定的减量值" class="headerlink" title="value减去给定的减量值"></a>value减去给定的减量值</h3><p><code>DECRBY key decrement</code></p>
+<h3 id="追加"><a href="#追加" class="headerlink" title="追加"></a>追加</h3><p><code>APPEND key value</code></p>
+<h2 id="hash-哈希"><a href="#hash-哈希" class="headerlink" title="hash (哈希)"></a>hash (哈希)</h2><p>Redis hash 是一个键名对集合。<br>Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。<br>每个 hash 可以存储 2^32 -1 键值对（40多亿）。  </p>
+<h3 id="删除多个value"><a href="#删除多个value" class="headerlink" title="删除多个value"></a>删除多个value</h3><p><code>HDEL key field2 [field2]</code></p>
+<h3 id="是否存在"><a href="#是否存在" class="headerlink" title="是否存在"></a>是否存在</h3><p><code>HEXISTS key field</code></p>
+<h3 id="获取字段的值"><a href="#获取字段的值" class="headerlink" title="获取字段的值"></a>获取字段的值</h3><p><code>HGET key field</code></p>
+<h3 id="获取所有的field-value"><a href="#获取所有的field-value" class="headerlink" title="获取所有的field-value"></a>获取所有的field-value</h3><p><code>HGETALL key</code></p>
+<h3 id="整数值加上增量"><a href="#整数值加上增量" class="headerlink" title="整数值加上增量"></a>整数值加上增量</h3><p><code>HINCRBY key field increment</code></p>
+<h3 id="浮点数值加上增量"><a href="#浮点数值加上增量" class="headerlink" title="浮点数值加上增量"></a>浮点数值加上增量</h3><p><code>HINCRBYFLOAT key field increment</code></p>
+<h3 id="获取所有field"><a href="#获取所有field" class="headerlink" title="获取所有field"></a>获取所有field</h3><p><code>HKEYS key</code></p>
+<h3 id="获取字段的数量"><a href="#获取字段的数量" class="headerlink" title="获取字段的数量"></a>获取字段的数量</h3><p><code>HLEN key</code></p>
+<h3 id="获取字段的值-1"><a href="#获取字段的值-1" class="headerlink" title="获取字段的值"></a>获取字段的值</h3><p><code>HMGET key field1 [field2]</code></p>
+<h3 id="设置多个field-value"><a href="#设置多个field-value" class="headerlink" title="设置多个field-value"></a>设置多个field-value</h3><p><code>HMSET key field1 value1 [field2 value2 ]</code></p>
+<h3 id="设置一个field-value"><a href="#设置一个field-value" class="headerlink" title="设置一个field-value"></a>设置一个field-value</h3><p><code>HSET key field value</code></p>
+<h3 id="field不存在时设置值"><a href="#field不存在时设置值" class="headerlink" title="field不存在时设置值"></a>field不存在时设置值</h3><p><code>HSETNX key field value</code></p>
+<h3 id="获取所有value"><a href="#获取所有value" class="headerlink" title="获取所有value"></a>获取所有value</h3><p><code>HVALS key</code></p>
+<h3 id="迭代键值对"><a href="#迭代键值对" class="headerlink" title="迭代键值对"></a>迭代键值对</h3><p><code>HSCAN key cursor [MATCH pattern] [COUNT count]</code></p>
+<h2 id="list-列表"><a href="#list-列表" class="headerlink" title="list (列表)"></a>list (列表)</h2><p>Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。<br>列表最多可存储 2^32 - 1 元素 (4294967295, 每个列表可存储40多亿)。  </p>
+<h3 id="BLPOP-key1-key2-timeout"><a href="#BLPOP-key1-key2-timeout" class="headerlink" title="BLPOP key1 [key2 ] timeout"></a><code>BLPOP key1 [key2 ] timeout</code></h3><p>移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</p>
+<h3 id="BRPOP-key1-key2-timeout"><a href="#BRPOP-key1-key2-timeout" class="headerlink" title="BRPOP key1 [key2 ] timeout"></a><code>BRPOP key1 [key2 ] timeout</code></h3><p>移出并获取列表的最后一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</p>
+<h3 id="BRPOPLPUSH-source-destination-timeout"><a href="#BRPOPLPUSH-source-destination-timeout" class="headerlink" title="BRPOPLPUSH source destination timeout"></a><code>BRPOPLPUSH source destination timeout</code></h3><p>从列表中弹出一个值，将弹出的元素插入到另外一个列表中并返回它； 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</p>
+<h3 id="通过索引获取元素"><a href="#通过索引获取元素" class="headerlink" title="通过索引获取元素"></a>通过索引获取元素</h3><p><code>LINDEX key index</code></p>
+<h3 id="在元素前或者后插入元素"><a href="#在元素前或者后插入元素" class="headerlink" title="在元素前或者后插入元素"></a>在元素前或者后插入元素</h3><p><code>LINSERT key BEFORE|AFTER pivot value</code></p>
+<h3 id="获取列表长度"><a href="#获取列表长度" class="headerlink" title="获取列表长度"></a>获取列表长度</h3><p><code>LLEN key</code></p>
+<h3 id="移出并获取第一个元素"><a href="#移出并获取第一个元素" class="headerlink" title="移出并获取第一个元素"></a>移出并获取第一个元素</h3><p><code>LPOP key</code></p>
+<h3 id="列表头部插入"><a href="#列表头部插入" class="headerlink" title="列表头部插入"></a>列表头部插入</h3><p><code>LPUSH key value1 [value2]</code></p>
+<h3 id="列表头部插入一个值"><a href="#列表头部插入一个值" class="headerlink" title="列表头部插入一个值"></a>列表头部插入一个值</h3><p><code>LPUSHX key value</code></p>
+<h3 id="获取列表范围内的元素"><a href="#获取列表范围内的元素" class="headerlink" title="获取列表范围内的元素"></a>获取列表范围内的元素</h3><p><code>LRANGE key start stop</code></p>
+<h3 id="移除列表元素"><a href="#移除列表元素" class="headerlink" title="移除列表元素"></a>移除列表元素</h3><p><code>LREM key count value</code></p>
+<h3 id="通过索引设置元素的值"><a href="#通过索引设置元素的值" class="headerlink" title="通过索引设置元素的值"></a>通过索引设置元素的值</h3><p><code>LSET key index value</code></p>
+<h3 id="缩短key-list的值"><a href="#缩短key-list的值" class="headerlink" title="缩短key list的值"></a>缩短key list的值</h3><p><code>LTRIM key start stop</code></p>
+<h3 id="移除并获取最后一个元素"><a href="#移除并获取最后一个元素" class="headerlink" title="移除并获取最后一个元素"></a>移除并获取最后一个元素</h3><p><code>RPOP key</code></p>
+<h3 id="RPOPLPUSH-source-destination"><a href="#RPOPLPUSH-source-destination" class="headerlink" title="RPOPLPUSH source destination"></a><code>RPOPLPUSH source destination</code></h3><p>移除列表的最后一个元素，并将该元素添加到另一个列表并返回</p>
+<h3 id="添加多个值"><a href="#添加多个值" class="headerlink" title="添加多个值"></a>添加多个值</h3><p><code>RPUSH key value1 [value2]</code></p>
+<h3 id="已存在的列表添加值"><a href="#已存在的列表添加值" class="headerlink" title="已存在的列表添加值"></a>已存在的列表添加值</h3><p><code>RPUSHX key value</code></p>
+<h2 id="set-集合"><a href="#set-集合" class="headerlink" title="set (集合)"></a>set (集合)</h2><p>Redis的Set是string类型的无序集合。<br>集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。<br>集合中最大的成员数为 2^32 - 1(4294967295, 每个集合可存储40多亿个成员)。 </p>
+<h3 id="添加多个成员"><a href="#添加多个成员" class="headerlink" title="添加多个成员"></a>添加多个成员</h3><p><code>SADD key member1 [member2]</code></p>
+<h3 id="集合的成员数"><a href="#集合的成员数" class="headerlink" title="集合的成员数"></a>集合的成员数</h3><p><code>SCARD key</code></p>
+<h3 id="集合的差集"><a href="#集合的差集" class="headerlink" title="集合的差集"></a>集合的差集</h3><p><code>SDIFF key1 [key2]</code></p>
+<h3 id="所有集合的差集并存储在-destination-中"><a href="#所有集合的差集并存储在-destination-中" class="headerlink" title="所有集合的差集并存储在 destination 中"></a>所有集合的差集并存储在 destination 中</h3><p><code>SDIFFSTORE destination key1 [key2]</code></p>
+<h3 id="集合的交集"><a href="#集合的交集" class="headerlink" title="集合的交集"></a>集合的交集</h3><p><code>SINTER key1 [key2]</code></p>
+<h3 id="集合的交集并存储在-destination-中"><a href="#集合的交集并存储在-destination-中" class="headerlink" title="集合的交集并存储在 destination 中"></a>集合的交集并存储在 destination 中</h3><p><code>SINTERSTORE destination key1 [key2]</code></p>
+<h3 id="判断元素是否在key集合中"><a href="#判断元素是否在key集合中" class="headerlink" title="判断元素是否在key集合中"></a>判断元素是否在key集合中</h3><p><code>SISMEMBER key value</code></p>
+<h3 id="返回所有成员"><a href="#返回所有成员" class="headerlink" title="返回所有成员"></a>返回所有成员</h3><p><code>SMEMBERS key</code></p>
+<h3 id="将元素从key集合移动到key2集合"><a href="#将元素从key集合移动到key2集合" class="headerlink" title="将元素从key集合移动到key2集合"></a>将元素从key集合移动到key2集合</h3><p><code>SMOVE key key2 value</code></p>
+<h3 id="移除并返回一个随机元素"><a href="#移除并返回一个随机元素" class="headerlink" title="移除并返回一个随机元素"></a>移除并返回一个随机元素</h3><p><code>SPOP key</code></p>
+<h3 id="返回集合多个随机数"><a href="#返回集合多个随机数" class="headerlink" title="返回集合多个随机数"></a>返回集合多个随机数</h3><p><code>SRANDMEMBER key [count]</code></p>
+<h3 id="移除集合多个成员"><a href="#移除集合多个成员" class="headerlink" title="移除集合多个成员"></a>移除集合多个成员</h3><p><code>SREM key member1 [member2]</code></p>
+<h3 id="返回所有集合的并集"><a href="#返回所有集合的并集" class="headerlink" title="返回所有集合的并集"></a>返回所有集合的并集</h3><p><code>SUNION key1 [key2]</code></p>
+<h3 id="所有给定集合的并集存储在-destination-集合中"><a href="#所有给定集合的并集存储在-destination-集合中" class="headerlink" title="所有给定集合的并集存储在 destination 集合中"></a>所有给定集合的并集存储在 destination 集合中</h3><p><code>SUNIONSTORE destination key1 [key2]</code></p>
+<h3 id="迭代集合中的元素"><a href="#迭代集合中的元素" class="headerlink" title="迭代集合中的元素"></a>迭代集合中的元素</h3><p><code>SSCAN key cursor [MATCH pattern] [COUNT count]</code></p>
+<h2 id="zset-sorted-set-有序集合"><a href="#zset-sorted-set-有序集合" class="headerlink" title="zset (sorted set 有序集合)"></a>zset (sorted set 有序集合)</h2><p>Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。<br>不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。<br>zset的成员是唯一的,但分数(score)却可以重复。  </p>
+<h3 id="ZADD-key-score1-member1-score2-member2"><a href="#ZADD-key-score1-member1-score2-member2" class="headerlink" title="ZADD key score1 member1 [score2 member2]"></a><code>ZADD key score1 member1 [score2 member2]</code></h3><p>向有序集合添加一个或多个成员，或者更新已存在成员的分数</p>
+<h3 id="ZCARD-key"><a href="#ZCARD-key" class="headerlink" title="ZCARD key"></a><code>ZCARD key</code></h3><p>获取有序集合的成员数</p>
+<h3 id="ZCOUNT-key-min-max"><a href="#ZCOUNT-key-min-max" class="headerlink" title="ZCOUNT key min max"></a><code>ZCOUNT key min max</code></h3><p>计算在有序集合中指定区间分数的成员数</p>
+<h3 id="ZINCRBY-key-increment-member"><a href="#ZINCRBY-key-increment-member" class="headerlink" title="ZINCRBY key increment member"></a><code>ZINCRBY key increment member</code></h3><p>有序集合中对指定成员的分数加上增量 increment</p>
+<h3 id="ZINTERSTORE-destination-numkeys-key-key"><a href="#ZINTERSTORE-destination-numkeys-key-key" class="headerlink" title="ZINTERSTORE destination numkeys key [key ...]"></a><code>ZINTERSTORE destination numkeys key [key ...]</code></h3><p>计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 key 中</p>
+<h3 id="ZLEXCOUNT-key-min-max"><a href="#ZLEXCOUNT-key-min-max" class="headerlink" title="ZLEXCOUNT key min max"></a><code>ZLEXCOUNT key min max</code></h3><p>在有序集合中计算指定字典区间内成员数量</p>
+<h3 id="ZRANGE-key-start-stop-WITHSCORES"><a href="#ZRANGE-key-start-stop-WITHSCORES" class="headerlink" title="ZRANGE key start stop [WITHSCORES]"></a><code>ZRANGE key start stop [WITHSCORES]</code></h3><p>通过索引区间返回有序集合成指定区间内的成员</p>
+<h3 id="ZRANGEBYLEX-key-min-max-LIMIT-offset-count"><a href="#ZRANGEBYLEX-key-min-max-LIMIT-offset-count" class="headerlink" title="ZRANGEBYLEX key min max [LIMIT offset count]"></a><code>ZRANGEBYLEX key min max [LIMIT offset count]</code></h3><p>通过字典区间返回有序集合的成员</p>
+<h3 id="ZRANGEBYSCORE-key-min-max-WITHSCORES-LIMIT"><a href="#ZRANGEBYSCORE-key-min-max-WITHSCORES-LIMIT" class="headerlink" title="ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT]"></a><code>ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT]</code></h3><p>通过分数返回有序集合指定区间内的成员</p>
+<h3 id="ZRANK-key-member"><a href="#ZRANK-key-member" class="headerlink" title="ZRANK key member"></a><code>ZRANK key member</code></h3><p>返回有序集合中指定成员的索引</p>
+<h3 id="ZREM-key-member-member"><a href="#ZREM-key-member-member" class="headerlink" title="ZREM key member [member ...]"></a><code>ZREM key member [member ...]</code></h3><p>移除有序集合中的一个或多个成员</p>
+<h3 id="ZREMRANGEBYLEX-key-min-max"><a href="#ZREMRANGEBYLEX-key-min-max" class="headerlink" title="ZREMRANGEBYLEX key min max"></a><code>ZREMRANGEBYLEX key min max</code></h3><p>移除有序集合中给定的字典区间的所有成员</p>
+<h3 id="ZREMRANGEBYRANK-key-start-stop"><a href="#ZREMRANGEBYRANK-key-start-stop" class="headerlink" title="ZREMRANGEBYRANK key start stop"></a><code>ZREMRANGEBYRANK key start stop</code></h3><p>移除有序集合中给定的排名区间的所有成员</p>
+<h3 id="ZREMRANGEBYSCORE-key-min-max"><a href="#ZREMRANGEBYSCORE-key-min-max" class="headerlink" title="ZREMRANGEBYSCORE key min max"></a><code>ZREMRANGEBYSCORE key min max</code></h3><p>移除有序集合中给定的分数区间的所有成员</p>
+<h3 id="ZREVRANGE-key-start-stop-WITHSCORES"><a href="#ZREVRANGE-key-start-stop-WITHSCORES" class="headerlink" title="ZREVRANGE key start stop [WITHSCORES]"></a><code>ZREVRANGE key start stop [WITHSCORES]</code></h3><p>返回有序集中指定区间内的成员，通过索引，分数从高到底</p>
+<h3 id="ZREVRANGEBYSCORE-key-max-min-WITHSCORES"><a href="#ZREVRANGEBYSCORE-key-max-min-WITHSCORES" class="headerlink" title="ZREVRANGEBYSCORE key max min [WITHSCORES]"></a><code>ZREVRANGEBYSCORE key max min [WITHSCORES]</code></h3><p>返回有序集中指定分数区间内的成员，分数从高到低排序</p>
+<h3 id="ZREVRANK-key-member"><a href="#ZREVRANK-key-member" class="headerlink" title="ZREVRANK key member"></a><code>ZREVRANK key member</code></h3><p>返回有序集合中指定成员的排名，有序集成员按分数值递减(从大到小)排序</p>
+<h3 id="ZSCORE-key-member"><a href="#ZSCORE-key-member" class="headerlink" title="ZSCORE key member"></a><code>ZSCORE key member</code></h3><p>返回有序集中，成员的分数值</p>
+<h3 id="ZUNIONSTORE-destination-numkeys-key-key"><a href="#ZUNIONSTORE-destination-numkeys-key-key" class="headerlink" title="ZUNIONSTORE destination numkeys key [key ...]"></a><code>ZUNIONSTORE destination numkeys key [key ...]</code></h3><p>计算给定的一个或多个有序集的并集，并存储在新的 key 中</p>
+<h3 id="ZSCAN-key-cursor-MATCH-pattern-COUNT-count"><a href="#ZSCAN-key-cursor-MATCH-pattern-COUNT-count" class="headerlink" title="ZSCAN key cursor [MATCH pattern] [COUNT count]"></a><code>ZSCAN key cursor [MATCH pattern] [COUNT count]</code></h3><p>迭代有序集合中的元素（包括元素成员和元素分值）</p>
+<h2 id="HyperLogLog-结构"><a href="#HyperLogLog-结构" class="headerlink" title="HyperLogLog 结构"></a>HyperLogLog 结构</h2><p>Redis 在 2.8.9 版本添加了 HyperLogLog 结构。<br>Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。<br>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基 数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。<br>但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。   </p>
+<h3 id="PFADD-key-element-element"><a href="#PFADD-key-element-element" class="headerlink" title="PFADD key element [element ...]"></a><code>PFADD key element [element ...]</code></h3><p>添加指定元素到 HyperLogLog 中。</p>
+<h3 id="PFCOUNT-key-key"><a href="#PFCOUNT-key-key" class="headerlink" title="PFCOUNT key [key ...]"></a><code>PFCOUNT key [key ...]</code></h3><p>返回给定 HyperLogLog 的基数估算值。</p>
+<h3 id="PFMERGE-destkey-sourcekey-sourcekey"><a href="#PFMERGE-destkey-sourcekey-sourcekey" class="headerlink" title="PFMERGE destkey sourcekey [sourcekey ...]"></a><code>PFMERGE destkey sourcekey [sourcekey ...]</code></h3><p>将多个 HyperLogLog 合并为一个 HyperLogLog </p>
+<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><h2 id="连接命令"><a href="#连接命令" class="headerlink" title="连接命令"></a>连接命令</h2><h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a><code>ping</code></h3><p>该命令用于检测 redis 服务是否启动。返回pong。查看服务是否运行</p>
+<h3 id="redis-cli-h-host-p-port-a-password"><a href="#redis-cli-h-host-p-port-a-password" class="headerlink" title="redis-cli -h host -p port -a password"></a><code>redis-cli -h host -p port -a password</code></h3><p>在远程 redis 服务上执行命令</p>
+<h3 id="AUTH-password"><a href="#AUTH-password" class="headerlink" title="AUTH password"></a><code>AUTH password</code></h3><p>验证密码是否正确</p>
+<h3 id="ECHO-message"><a href="#ECHO-message" class="headerlink" title="ECHO message"></a><code>ECHO message</code></h3><p>打印字符串</p>
+<h3 id="QUIT"><a href="#QUIT" class="headerlink" title="QUIT"></a><code>QUIT</code></h3><p>关闭当前连接</p>
+<h3 id="SELECT-index"><a href="#SELECT-index" class="headerlink" title="SELECT index"></a><code>SELECT index</code></h3><p>切换到指定的数据库</p>
+<h2 id="客户端连接命令"><a href="#客户端连接命令" class="headerlink" title="客户端连接命令"></a>客户端连接命令</h2><h3 id="CLIENT-LIST"><a href="#CLIENT-LIST" class="headerlink" title="CLIENT LIST"></a><code>CLIENT LIST</code></h3><p>返回连接到 redis 服务的客户端列表</p>
+<h3 id="CLIENT-SETNAME"><a href="#CLIENT-SETNAME" class="headerlink" title="CLIENT SETNAME"></a><code>CLIENT SETNAME</code></h3><p>设置当前连接的名称</p>
+<h3 id="CLIENT-GETNAME"><a href="#CLIENT-GETNAME" class="headerlink" title="CLIENT GETNAME"></a><code>CLIENT GETNAME</code></h3><p>获取通过 CLIENT SETNAME 命令设置的服务名称</p>
+<h3 id="CLIENT-PAUSE"><a href="#CLIENT-PAUSE" class="headerlink" title="CLIENT PAUSE"></a><code>CLIENT PAUSE</code></h3><p>挂起客户端连接，指定挂起的时间以毫秒计</p>
+<h3 id="CLIENT-KILL"><a href="#CLIENT-KILL" class="headerlink" title="CLIENT KILL"></a><code>CLIENT KILL</code></h3><p>关闭客户端连接</p>
+<h2 id="服务器命令"><a href="#服务器命令" class="headerlink" title="服务器命令"></a>服务器命令</h2><h3 id="BGREWRITEAOF"><a href="#BGREWRITEAOF" class="headerlink" title="BGREWRITEAOF"></a><code>BGREWRITEAOF</code></h3><p>异步执行一个 AOF（AppendOnly File） 文件重写操作</p>
+<h3 id="BGSAVE"><a href="#BGSAVE" class="headerlink" title="BGSAVE"></a><code>BGSAVE</code></h3><p>在后台异步保存当前数据库的数据到磁盘</p>
+<h3 id="CLIENT-KILL-ip-port-ID-client-id"><a href="#CLIENT-KILL-ip-port-ID-client-id" class="headerlink" title="CLIENT KILL [ip:port] [ID client-id]"></a><code>CLIENT KILL [ip:port] [ID client-id]</code></h3><p>关闭客户端连接</p>
+<h3 id="CLIENT-LIST-1"><a href="#CLIENT-LIST-1" class="headerlink" title="CLIENT LIST"></a><code>CLIENT LIST</code></h3><p>获取连接到服务器的客户端连接列表</p>
+<h3 id="CLIENT-GETNAME-1"><a href="#CLIENT-GETNAME-1" class="headerlink" title="CLIENT GETNAME"></a><code>CLIENT GETNAME</code></h3><p>获取连接的名称</p>
+<h3 id="CLIENT-PAUSE-timeout"><a href="#CLIENT-PAUSE-timeout" class="headerlink" title="CLIENT PAUSE timeout"></a><code>CLIENT PAUSE timeout</code></h3><p>在指定时间内终止运行来自客户端的命令</p>
+<h3 id="CLIENT-SETNAME-connection-name"><a href="#CLIENT-SETNAME-connection-name" class="headerlink" title="CLIENT SETNAME connection-name"></a><code>CLIENT SETNAME connection-name</code></h3><p>设置当前连接的名称</p>
+<h3 id="CLUSTER-SLOTS"><a href="#CLUSTER-SLOTS" class="headerlink" title="CLUSTER SLOTS"></a><code>CLUSTER SLOTS</code></h3><p>获取集群节点的映射数组</p>
+<h3 id="COMMAND"><a href="#COMMAND" class="headerlink" title="COMMAND"></a><code>COMMAND</code></h3><p>获取 Redis 命令详情数组</p>
+<h3 id="COMMAND-COUNT"><a href="#COMMAND-COUNT" class="headerlink" title="COMMAND COUNT"></a><code>COMMAND COUNT</code></h3><p>获取 Redis 命令总数</p>
+<h3 id="COMMAND-GETKEYS"><a href="#COMMAND-GETKEYS" class="headerlink" title="COMMAND GETKEYS"></a><code>COMMAND GETKEYS</code></h3><p>获取给定命令的所有键</p>
+<h3 id="TIME"><a href="#TIME" class="headerlink" title="TIME"></a><code>TIME</code></h3><p>返回当前服务器时间</p>
+<h3 id="COMMAND-INFO-command-name-command-name"><a href="#COMMAND-INFO-command-name-command-name" class="headerlink" title="COMMAND INFO command-name [command-name ...]"></a><code>COMMAND INFO command-name [command-name ...]</code></h3><p>获取指定 Redis 命令描述的数组</p>
+<h3 id="CONFIG-GET-parameter"><a href="#CONFIG-GET-parameter" class="headerlink" title="CONFIG GET parameter"></a><code>CONFIG GET parameter</code></h3><p>获取指定配置参数的值</p>
+<h3 id="CONFIG-REWRITE"><a href="#CONFIG-REWRITE" class="headerlink" title="CONFIG REWRITE"></a><code>CONFIG REWRITE</code></h3><p>对启动 Redis 服务器时所指定的 redis.conf 配置文件进行改写</p>
+<h3 id="CONFIG-SET-parameter-value"><a href="#CONFIG-SET-parameter-value" class="headerlink" title="CONFIG SET parameter value"></a><code>CONFIG SET parameter value</code></h3><p>修改 redis 配置参数，无需重启</p>
+<h3 id="CONFIG-RESETSTAT"><a href="#CONFIG-RESETSTAT" class="headerlink" title="CONFIG RESETSTAT"></a><code>CONFIG RESETSTAT</code></h3><p>重置 INFO 命令中的某些统计数据</p>
+<h3 id="DBSIZE"><a href="#DBSIZE" class="headerlink" title="DBSIZE"></a><code>DBSIZE</code></h3><p>返回当前数据库的 key 的数量</p>
+<h3 id="DEBUG-OBJECT-key"><a href="#DEBUG-OBJECT-key" class="headerlink" title="DEBUG OBJECT key"></a><code>DEBUG OBJECT key</code></h3><p>获取 key 的调试信息</p>
+<h3 id="DEBUG-SEGFAULT"><a href="#DEBUG-SEGFAULT" class="headerlink" title="DEBUG SEGFAULT"></a><code>DEBUG SEGFAULT</code></h3><p>让 Redis 服务崩溃</p>
+<h3 id="FLUSHALL"><a href="#FLUSHALL" class="headerlink" title="`FLUSHALL"></a>`FLUSHALL</h3><p>删除所有数据库的所有key`</p>
+<h3 id="FLUSHDB"><a href="#FLUSHDB" class="headerlink" title="`FLUSHDB"></a>`FLUSHDB</h3><p>删除当前数据库的所有key`</p>
+<h3 id="INFO-section"><a href="#INFO-section" class="headerlink" title="INFO [section]"></a><code>INFO [section]</code></h3><p>获取 Redis 服务器的各种信息和统计数值</p>
+<h3 id="LASTSAVE"><a href="#LASTSAVE" class="headerlink" title="LASTSAVE"></a><code>LASTSAVE</code></h3><p>返回最近一次 Redis 成功将数据保存到磁盘上的时间，以 UNIX 时间戳格式表示</p>
+<h3 id="MONITOR"><a href="#MONITOR" class="headerlink" title="MONITOR"></a><code>MONITOR</code></h3><p>实时打印出 Redis 服务器接收到的命令，调试用</p>
+<h3 id="ROLE"><a href="#ROLE" class="headerlink" title="ROLE"></a><code>ROLE</code></h3><p>返回主从实例所属的角色</p>
+<h3 id="SAVE"><a href="#SAVE" class="headerlink" title="SAVE"></a><code>SAVE</code></h3><p>异步保存数据到硬盘</p>
+<h3 id="SHUTDOWN-NOSAVE-SAVE"><a href="#SHUTDOWN-NOSAVE-SAVE" class="headerlink" title="SHUTDOWN [NOSAVE] [SAVE]"></a><code>SHUTDOWN [NOSAVE] [SAVE]</code></h3><p>异步保存数据到硬盘，并关闭服务器</p>
+<h3 id="SLAVEOF-host-port"><a href="#SLAVEOF-host-port" class="headerlink" title="SLAVEOF host port"></a><code>SLAVEOF host port</code></h3><p>将当前服务器转变为指定服务器的从属服务器(slave server)</p>
+<h3 id="SLOWLOG-subcommand-argument"><a href="#SLOWLOG-subcommand-argument" class="headerlink" title="SLOWLOG subcommand [argument]"></a><code>SLOWLOG subcommand [argument]</code></h3><p>管理 redis 的慢日志</p>
+<h3 id="SYNC"><a href="#SYNC" class="headerlink" title="SYNC"></a><code>SYNC</code></h3><p>用于复制功能(replication)的内部命令</p>
+<h2 id="键-key-的管理-COMMAND-KEY-NAME"><a href="#键-key-的管理-COMMAND-KEY-NAME" class="headerlink" title="键(key)的管理 COMMAND KEY_NAME"></a>键(key)的管理 <code>COMMAND KEY_NAME</code></h2><h3 id="DEL-key"><a href="#DEL-key" class="headerlink" title="DEL key"></a>DEL key</h3><p>该命令用于在 key 存在时删除 key。</p>
+<h3 id="DUMP-key"><a href="#DUMP-key" class="headerlink" title="DUMP key"></a>DUMP key</h3><p>序列化给定 key ，并返回被序列化的值。</p>
+<h3 id="EXISTS-key"><a href="#EXISTS-key" class="headerlink" title="EXISTS key"></a>EXISTS key</h3><p>检查给定 key 是否存在。</p>
+<h3 id="EXPIRE-key-seconds"><a href="#EXPIRE-key-seconds" class="headerlink" title="EXPIRE key seconds"></a>EXPIRE key seconds</h3><p>为给定 key 设置过期时间。</p>
+<h3 id="EXPIREAT-key-timestamp"><a href="#EXPIREAT-key-timestamp" class="headerlink" title="EXPIREAT key timestamp"></a>EXPIREAT key timestamp</h3><p>EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)。</p>
+<h3 id="PEXPIRE-key-milliseconds"><a href="#PEXPIRE-key-milliseconds" class="headerlink" title="PEXPIRE key milliseconds"></a>PEXPIRE key milliseconds</h3><p>设置 key 的过期时间以毫秒计。</p>
+<h3 id="PEXPIREAT-key-milliseconds-timestamp"><a href="#PEXPIREAT-key-milliseconds-timestamp" class="headerlink" title="PEXPIREAT key milliseconds-timestamp"></a>PEXPIREAT key milliseconds-timestamp</h3><p>设置 key 过期时间的时间戳(unix timestamp) 以毫秒计</p>
+<h3 id="KEYS-pattern"><a href="#KEYS-pattern" class="headerlink" title="KEYS pattern"></a>KEYS pattern</h3><p>查找所有符合给定模式( pattern)的 key 。</p>
+<h3 id="MOVE-key-db"><a href="#MOVE-key-db" class="headerlink" title="MOVE key db"></a>MOVE key db</h3><p>将当前数据库的 key 移动到给定的数据库 db 当中。</p>
+<h3 id="PERSIST-key"><a href="#PERSIST-key" class="headerlink" title="PERSIST key"></a>PERSIST key</h3><p>移除 key 的过期时间，key 将持久保持。</p>
+<h3 id="PTTL-key"><a href="#PTTL-key" class="headerlink" title="PTTL key"></a>PTTL key</h3><p>以毫秒为单位返回 key 的剩余的过期时间。</p>
+<h3 id="TTL-key"><a href="#TTL-key" class="headerlink" title="TTL key"></a>TTL key</h3><p>以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)。</p>
+<h3 id="RANDOMKEY"><a href="#RANDOMKEY" class="headerlink" title="RANDOMKEY"></a>RANDOMKEY</h3><p>从当前数据库中随机返回一个 key 。</p>
+<h3 id="RENAME-key-newkey"><a href="#RENAME-key-newkey" class="headerlink" title="RENAME key newkey"></a>RENAME key newkey</h3><p>修改 key 的名称</p>
+<h3 id="RENAMENX-key-newkey"><a href="#RENAMENX-key-newkey" class="headerlink" title="RENAMENX key newkey"></a>RENAMENX key newkey</h3><p>仅当 newkey 不存在时，将 key 改名为 newkey 。</p>
+<h3 id="TYPE-key"><a href="#TYPE-key" class="headerlink" title="TYPE key"></a>TYPE key</h3><p>返回 key 所储存的值的类型。</p>
+<h1 id="Redis-发布订阅"><a href="#Redis-发布订阅" class="headerlink" title="Redis 发布订阅"></a>Redis 发布订阅</h1><p>Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。<br>Redis 客户端可以订阅任意数量的频道。<br>下图展示了频道 channel1 ， 以及订阅这个频道的三个客户端 —— client2 、 client5 和 client1 之间的关系：<br><img src="&quot;http://www.runoob.com/wp-content/uploads/2014/11/pubsub1.png&quot;" alt="订阅发布关系"><br>当有新消息通过 PUBLISH 命令发送给频道 channel1 时， 这个消息就会被发送给订阅它的三个客户端：<br><img src="&quot;http://www.runoob.com/wp-content/uploads/2014/11/pubsub2.png&quot;" alt="订阅发布关系"> </p>
+<h2 id="Redis-发布订阅操作示例"><a href="#Redis-发布订阅操作示例" class="headerlink" title="Redis 发布订阅操作示例"></a>Redis 发布订阅操作示例</h2><p>创建了订阅频道名为 redisChat:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUBSCRIBE redisChat</span><br></pre></td></tr></table></figure></p>
+<p>打开新的客户端，并输入命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUBLISH redisChat &quot;Redis is a great caching technique&quot;</span><br><span class="line">PUBLISH redisChat &quot;Learn redis by runoob.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>订阅者收到消息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;message&quot;</span><br><span class="line">2) &quot;redisChat&quot;</span><br><span class="line">3) &quot;Redis is a great caching technique&quot;</span><br><span class="line">1) &quot;message&quot;</span><br><span class="line">2) &quot;redisChat&quot;</span><br><span class="line">3) &quot;Learn redis by runoob.com&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Redis-发布订阅命令"><a href="#Redis-发布订阅命令" class="headerlink" title="Redis 发布订阅命令"></a>Redis 发布订阅命令</h2><h3 id="PSUBSCRIBE-pattern-pattern"><a href="#PSUBSCRIBE-pattern-pattern" class="headerlink" title="PSUBSCRIBE pattern [pattern ...]"></a><code>PSUBSCRIBE pattern [pattern ...]</code></h3><p>订阅一个或多个符合给定模式的频道。</p>
+<h3 id="PUBSUB-subcommand-argument-argument"><a href="#PUBSUB-subcommand-argument-argument" class="headerlink" title="PUBSUB subcommand [argument [argument ...]]"></a><code>PUBSUB subcommand [argument [argument ...]]</code></h3><p>查看订阅与发布系统状态。</p>
+<h3 id="PUBLISH-channel-message"><a href="#PUBLISH-channel-message" class="headerlink" title="PUBLISH channel message"></a><code>PUBLISH channel message</code></h3><p>将信息发送到指定的频道。</p>
+<h3 id="PUNSUBSCRIBE-pattern-pattern"><a href="#PUNSUBSCRIBE-pattern-pattern" class="headerlink" title="PUNSUBSCRIBE [pattern [pattern ...]]"></a><code>PUNSUBSCRIBE [pattern [pattern ...]]</code></h3><p>退订所有给定模式的频道。</p>
+<h3 id="SUBSCRIBE-channel-channel"><a href="#SUBSCRIBE-channel-channel" class="headerlink" title="SUBSCRIBE channel [channel ...]"></a><code>SUBSCRIBE channel [channel ...]</code></h3><p>订阅给定的一个或多个频道的信息。</p>
+<h3 id="UNSUBSCRIBE-channel-channel"><a href="#UNSUBSCRIBE-channel-channel" class="headerlink" title="UNSUBSCRIBE [channel [channel ...]]"></a><code>UNSUBSCRIBE [channel [channel ...]]</code></h3><p>指退订给定的频道。</p>
+<h1 id="Redis-事物"><a href="#Redis-事物" class="headerlink" title="Redis 事物"></a>Redis 事物</h1><p>Redis 事务可以一次执行多个命令， 并且带有以下两个重要的保证：  </p>
+<ul>
+<li>事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</li>
+<li>事务是一个原子操作：事务中的命令要么全部被执行，要么全部都不执行。  </li>
+</ul>
+<p>一个事务从开始到执行会经历以下三个阶段：</p>
+<ul>
+<li>开始事务。</li>
+<li>命令入队。</li>
+<li>执行事务。</li>
+</ul>
+<h2 id="示例操作"><a href="#示例操作" class="headerlink" title="示例操作"></a>示例操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MULTI</span><br><span class="line">SET book-name &quot;Mastering C++ in 21 days&quot;</span><br><span class="line">GET book-name</span><br><span class="line">SADD tag &quot;C++&quot; &quot;Programming&quot; &quot;Mastering Series&quot;</span><br><span class="line">SMEMBERS tag</span><br><span class="line">EXEC</span><br></pre></td></tr></table></figure>
+<h2 id="Redis事物命令"><a href="#Redis事物命令" class="headerlink" title="Redis事物命令"></a>Redis事物命令</h2><h3 id="DISCARD"><a href="#DISCARD" class="headerlink" title="DISCARD"></a><code>DISCARD</code></h3><p>取消事务，放弃执行事务块内的所有命令。</p>
+<h3 id="EXEC"><a href="#EXEC" class="headerlink" title="EXEC"></a><code>EXEC</code></h3><p>执行所有事务块内的命令。</p>
+<h3 id="MULTI"><a href="#MULTI" class="headerlink" title="MULTI"></a><code>MULTI</code></h3><p>标记一个事务块的开始。</p>
+<h3 id="UNWATCH"><a href="#UNWATCH" class="headerlink" title="UNWATCH"></a><code>UNWATCH</code></h3><p>取消 WATCH 命令对所有 key 的监视。</p>
+<h3 id="WATCH-key-key"><a href="#WATCH-key-key" class="headerlink" title="WATCH key [key ...]"></a><code>WATCH key [key ...]</code></h3><p>监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断。</p>
+<h1 id="Redis-脚本"><a href="#Redis-脚本" class="headerlink" title="Redis 脚本"></a>Redis 脚本</h1><p>Redis 脚本使用 Lua 解释器来执行脚本。 Reids 2.6 版本通过内嵌支持 Lua 环境。执行脚本的常用命令为 EVAL。 </p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p><code>EVAL script numkeys key [key ...] arg [arg ...]</code><br>例子<br><code>EVAL &quot;return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}&quot; 2 key1 key2 first second</code></p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="EVAL-script-numkeys-key-key-arg-arg"><a href="#EVAL-script-numkeys-key-key-arg-arg" class="headerlink" title="EVAL script numkeys key [key ...] arg [arg ...]"></a><code>EVAL script numkeys key [key ...] arg [arg ...]</code></h3><p>执行 Lua 脚本。</p>
+<h3 id="EVALSHA-sha1-numkeys-key-key-arg-arg"><a href="#EVALSHA-sha1-numkeys-key-key-arg-arg" class="headerlink" title="EVALSHA sha1 numkeys key [key ...] arg [arg ...]"></a><code>EVALSHA sha1 numkeys key [key ...] arg [arg ...]</code></h3><p>执行 Lua 脚本。</p>
+<h3 id="SCRIPT-EXISTS-script-script"><a href="#SCRIPT-EXISTS-script-script" class="headerlink" title="SCRIPT EXISTS script [script ...]"></a><code>SCRIPT EXISTS script [script ...]</code></h3><p>查看指定的脚本是否已经被保存在缓存当中。</p>
+<h3 id="SCRIPT-FLUSH"><a href="#SCRIPT-FLUSH" class="headerlink" title="SCRIPT FLUSH"></a><code>SCRIPT FLUSH</code></h3><p>从脚本缓存中移除所有脚本。</p>
+<h3 id="SCRIPT-KILL"><a href="#SCRIPT-KILL" class="headerlink" title="SCRIPT KILL"></a><code>SCRIPT KILL</code></h3><p>杀死当前正在运行的 Lua 脚本。</p>
+<h3 id="SCRIPT-LOAD-script"><a href="#SCRIPT-LOAD-script" class="headerlink" title="SCRIPT LOAD script"></a><code>SCRIPT LOAD script</code></h3><p>将脚本 script 添加到脚本缓存中，但并不立即执行这个脚本。</p>
+<h1 id="Redis-高级操作"><a href="#Redis-高级操作" class="headerlink" title="Redis 高级操作"></a>Redis 高级操作</h1><h2 id="数据备份与恢复"><a href="#数据备份与恢复" class="headerlink" title="数据备份与恢复"></a>数据备份与恢复</h2><h3 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h3><p><code>save</code>该命令将在 redis 安装目录中创建dump.rdb文件。<br><code>Bgsave</code> 该命令也可以备份文件，是在后台执行。</p>
+<h3 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h3><p>将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。<br>查看redis目录<code>CONFIG GET dir</code></p>
+<h1 id="Redis-安全"><a href="#Redis-安全" class="headerlink" title="Redis 安全"></a>Redis 安全</h1><p>我们可以通过 redis 的配置文件设置密码参数，客户端连接到 redis 服务就需要密码验证，这样可以让你的 redis 服务更安全。 </p>
+<h2 id="设置密码与获取密码"><a href="#设置密码与获取密码" class="headerlink" title="设置密码与获取密码"></a>设置密码与获取密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONFIG set requirepass &quot;hello&quot;</span><br><span class="line">CONFIG get requirepass</span><br></pre></td></tr></table></figure>
+<h2 id="验证密码"><a href="#验证密码" class="headerlink" title="验证密码"></a>验证密码</h2><p><code>AUTO password</code></p>
+<h1 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h1><p>Redis 性能测试是通过同时执行多个命令实现的。</p>
+<h2 id="命令与参数解释："><a href="#命令与参数解释：" class="headerlink" title="命令与参数解释："></a>命令与参数解释：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-benchmark [option] [option value]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-h：指定服务器主机名，默认值：127.0.0.1</li>
+<li>-p：指定服务器端口，默认值：6379</li>
+<li>-s：指定服务器socket    </li>
+<li>-c：指定并发连接数，默认值：50</li>
+<li>-n：指定请求数，默认值：10000</li>
+<li>-d：以字节的形式指定 SET/GET 值的数据大小，默认值：2</li>
+<li>-k：1=keep alive 0=reconnect，默认值：1</li>
+<li>-r：SET/GET/INCR 使用随机 key, SADD 使用随机值    </li>
+<li>-P：通过管道传输 <numreq> 请求，默认值：1</numreq></li>
+<li>-q：强制退出 redis。仅显示 query/sec 值    </li>
+<li>–csv：以 CSV 格式输出    </li>
+<li>-l：生成循环，永久执行测试    </li>
+<li>-t：仅运行以逗号分隔的测试命令列表。    </li>
+<li>-I：Idle 模式。仅打开 N 个 idle 连接并等待。    </li>
+</ul>
+<h1 id="Redis-管道技术"><a href="#Redis-管道技术" class="headerlink" title="Redis 管道技术"></a>Redis 管道技术</h1><p>Redis是一种基于客户端-服务端模型以及请求/响应协议的TCP服务。这意味着通常情况下一个请求会遵循以下步骤：</p>
+<ul>
+<li>客户端向服务端发送一个查询请求，并监听Socket返回，通常是以阻塞模式，等待服务端响应。</li>
+<li>服务端处理命令，并将结果返回给客户端。</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>Redis 管道技术可以在服务端未响应时，客户端可以继续向服务端发送请求，并最终一次性读取所有服务端的响应。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(echo -en &quot;PING\r\n SET liang redis\r\nGET liang\r\nINCR visitor\r\nINCR visitor\r\nINCR visitor\r\n&quot;; sleep 10) | nc localhost 6379</span><br><span class="line"></span><br><span class="line">+PONG</span><br><span class="line">+OK</span><br><span class="line">redis</span><br><span class="line">:1</span><br><span class="line">:2</span><br><span class="line">:3</span><br></pre></td></tr></table></figure></p>
+<p> 以上实例中我们通过使用 PING 命令查看redis服务是否可用， 之后我们们设置了 runoobkey 的值为 redis，然后我们获取 runoobkey 的值并使得 visitor 自增 3 次。<br>在返回的结果中我们可以看到这些命令一次性向 redis 服务提交，并最终一次性读取所有服务端的响应   </p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>管道技术最显著的优势是提高了 redis 服务的性能。<br>在下面的测试中，我们将使用Redis的Ruby客户端，支持管道技术特性，测试管道技术对速度的提升效果。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'rubygems'</span> </span><br><span class="line"><span class="keyword">require</span> <span class="string">'redis'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bench</span><span class="params">(descr)</span></span> </span><br><span class="line">start = Time.now </span><br><span class="line"><span class="keyword">yield</span> </span><br><span class="line">puts <span class="string">"<span class="subst">#&#123;descr&#125;</span> <span class="subst">#&#123;Time.now-start&#125;</span> seconds"</span> </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">without_pipelining</span> </span></span><br><span class="line">r = Redis.new </span><br><span class="line"><span class="number">10000</span>.times &#123; </span><br><span class="line">	r.ping </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">with_pipelining</span> </span></span><br><span class="line">r = Redis.new </span><br><span class="line">r.pipelined &#123; </span><br><span class="line">	<span class="number">10000</span>.times &#123; </span><br><span class="line">		r.ping </span><br><span class="line">	&#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">bench(<span class="string">"without pipelining"</span>) &#123; </span><br><span class="line">	without_pipelining </span><br><span class="line">&#125; </span><br><span class="line">bench(<span class="string">"with pipelining"</span>) &#123; </span><br><span class="line">	with_pipelining </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 从处于局域网中的Mac OS X系统上执行上面这个简单脚本的数据表明，开启了管道操作后，往返时延已经被改善得相当低了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">without pipelining 1.185238 seconds </span><br><span class="line">with pipelining 0.250783 seconds</span><br></pre></td></tr></table></figure></p>
+<p>如你所见，开启管道后，我们的速度效率提升了5倍。</p>
+<h1 id="Redis-分区"><a href="#Redis-分区" class="headerlink" title="Redis 分区"></a>Redis 分区</h1><p>分区是分割数据到多个Redis实例的处理过程，因此每个实例只保存key的一个子集。</p>
+<h2 id="分区的优势"><a href="#分区的优势" class="headerlink" title="分区的优势"></a>分区的优势</h2><ul>
+<li>通过利用多台计算机内存的和值，允许我们构造更大的数据库。</li>
+<li><p>通过多核和多台计算机，允许我们扩展计算能力；通过多台计算机和网络适配器，允许我们扩展网络带宽。</p>
+<h2 id="分区的不足"><a href="#分区的不足" class="headerlink" title="分区的不足"></a>分区的不足</h2><p>redis的一些特性在分区方面表现的不是很好：</p>
+</li>
+<li><p>涉及多个key的操作通常是不被支持的。举例来说，当两个set映射到不同的redis实例上时，你就不能对这两个set执行交集操作。</p>
+</li>
+<li>涉及多个key的redis事务不能使用。</li>
+<li>当使用分区时，数据处理较为复杂，比如你需要处理多个rdb/aof文件，并且从多个实例和主机备份持久化文件。</li>
+<li>增加或删除容量也比较复杂。redis集群大多数支持在运行时增加、删除节点的透明数据平衡的能力，但是类似于客户端分区、代理等其他系统则不支持这项特性。然而，一种叫做presharding的技术对此是有帮助的。</li>
+</ul>
+<h2 id="分区类型"><a href="#分区类型" class="headerlink" title="分区类型"></a>分区类型</h2><p>Redis 有两种类型分区。 假设有4个Redis实例 R0，R1，R2，R3，和类似user:1，user:2这样的表示用户的多个key，对既定的key有多种不同方式来选择这个key存放在哪个实例中。也就是说，有不同的系统来映射某个key到某个Redis服务。</p>
+<h3 id="范围分区"><a href="#范围分区" class="headerlink" title="范围分区"></a>范围分区</h3><p>最简单的分区方式是按范围分区，就是映射一定范围的对象到特定的Redis实例。<br>比如，ID从0到10000的用户会保存到实例R0，ID从10001到 20000的用户会保存到R1，以此类推。<br>这种方式是可行的，并且在实际中使用，不足就是要有一个区间范围到实例的映射表。这个表要被管理，同时还需要各 种对象的映射表，通常对Redis来说并非是好的方法。</p>
+<h3 id="哈希分区"><a href="#哈希分区" class="headerlink" title="哈希分区"></a>哈希分区</h3><p>另外一种分区方法是hash分区。这对任何key都适用，也无需是object_name:这种形式，像下面描述的一样简单：</p>
+<ul>
+<li>用一个hash函数将key转换为一个数字，比如使用crc32 hash函数。对key foobar执行crc32(foobar)会输出类似93024922的整数。</li>
+<li>对这个整数取模，将其转化为0-3之间的数字，就可以将这个整数映射到4个Redis实例中的一个了。93024922 % 4 = 2，就是说key foobar应该被存到R2实例中。注意：取模操作是取除的余数，通常在多种编程语言中用%操作符实现。</li>
+</ul>
+<h1 id="java-使用Redis"><a href="#java-使用Redis" class="headerlink" title="java 使用Redis"></a>java 使用Redis</h1><p>需先安装Redis。并且加载jedis.jar</p>
+<h2 id="连接到redis服务"><a href="#连接到redis服务" class="headerlink" title="连接到redis服务"></a>连接到redis服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import redis.clients.jedis.Jedis;</span><br><span class="line"> </span><br><span class="line">public class RedisJava &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //连接本地的 Redis 服务</span><br><span class="line">        Jedis jedis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">        System.out.println(&quot;连接成功&quot;);</span><br><span class="line">        //查看服务是否运行</span><br><span class="line">        System.out.println(&quot;服务正在运行: &quot;+jedis.ping());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Redis-Java-String-字符串-实例"><a href="#Redis-Java-String-字符串-实例" class="headerlink" title="Redis Java String(字符串) 实例"></a>Redis Java String(字符串) 实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import redis.clients.jedis.Jedis;</span><br><span class="line"> </span><br><span class="line">public class RedisStringJava &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //连接本地的 Redis 服务</span><br><span class="line">        Jedis jedis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">        System.out.println(&quot;连接成功&quot;);</span><br><span class="line">        //设置 redis 字符串数据</span><br><span class="line">        jedis.set(&quot;mykey&quot;, &quot;hello&quot;);</span><br><span class="line">        // 获取存储的数据并输出</span><br><span class="line">        System.out.println(&quot;redis 存储的字符串为: &quot;+ jedis.get(&quot;mykey&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Redis-Java-List-列表-实例"><a href="#Redis-Java-List-列表-实例" class="headerlink" title="Redis Java List(列表) 实例"></a>Redis Java List(列表) 实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.util.List;</span><br><span class="line">import redis.clients.jedis.Jedis;</span><br><span class="line"> </span><br><span class="line">public class RedisListJava &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //连接本地的 Redis 服务</span><br><span class="line">        Jedis jedis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">        System.out.println(&quot;连接成功&quot;);</span><br><span class="line">        //存储数据到列表中</span><br><span class="line">        jedis.lpush(&quot;site-list&quot;, &quot;Baidu&quot;);</span><br><span class="line">        jedis.lpush(&quot;site-list&quot;, &quot;Google&quot;);</span><br><span class="line">        jedis.lpush(&quot;site-list&quot;, &quot;Taobao&quot;);</span><br><span class="line">        // 获取存储的数据并输出</span><br><span class="line">        List&lt;String&gt; list = jedis.lrange(&quot;site-list&quot;, 0 ,2);</span><br><span class="line">        for(int i=0; i&lt;list.size(); i++) &#123;</span><br><span class="line">            System.out.println(&quot;列表项为: &quot;+list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Redis-Java-Keys-实例"><a href="#Redis-Java-Keys-实例" class="headerlink" title="Redis Java Keys 实例"></a>Redis Java Keys 实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.Set;</span><br><span class="line">import redis.clients.jedis.Jedis;</span><br><span class="line"> </span><br><span class="line">public class RedisKeyJava &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //连接本地的 Redis 服务</span><br><span class="line">        Jedis jedis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">        System.out.println(&quot;连接成功&quot;);</span><br><span class="line"> </span><br><span class="line">        // 获取数据并输出</span><br><span class="line">        Set&lt;String&gt; keys = jedis.keys(&quot;*&quot;); </span><br><span class="line">        Iterator&lt;String&gt; it=keys.iterator() ;   </span><br><span class="line">        while(it.hasNext())&#123;   </span><br><span class="line">            String key = it.next();   </span><br><span class="line">            System.out.println(key);   </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/19/maven-实用总结/" rel="next" title="maven-实用总结">
+                <i class="fa fa-chevron-left"></i> maven-实用总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/22/MySql-用法说明/" rel="prev" title="MySql-用法说明">
+                MySql-用法说明 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhaoliang</p>
+              <p class="site-description motion-element" itemprop="description">有些事并不是看到希望才去坚持，而是坚持了才会看到希望</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liangHenry" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cczhaoliang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/liang_henry" target="_blank" title="csdn">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>csdn</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Redis"><span class="nav-number">1.1.</span> <span class="nav-text">安装Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行服务器"><span class="nav-number">1.2.</span> <span class="nav-text">运行服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行redis客户端"><span class="nav-number">1.3.</span> <span class="nav-text">运行redis客户端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置设置"><span class="nav-number">2.</span> <span class="nav-text">配置设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CONFIG-GET-CONFIG-SETTING-NAME"><span class="nav-number">2.1.</span> <span class="nav-text">CONFIG GET CONFIG_SETTING_NAME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CONFIG-SET-CONFIG-SETTING-NAME-NEW-CONFIG-VALUE"><span class="nav-number">2.2.</span> <span class="nav-text">CONFIG SET CONFIG_SETTING_NAME NEW_CONFIG_VALUE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置内容详细介绍："><span class="nav-number">2.3.</span> <span class="nav-text">配置内容详细介绍：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#string-字符串"><span class="nav-number">3.1.</span> <span class="nav-text">string (字符串)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置key的值"><span class="nav-number">3.1.1.</span> <span class="nav-text">设置key的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取key的值"><span class="nav-number">3.1.2.</span> <span class="nav-text">获取key的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截取返回字符"><span class="nav-number">3.1.3.</span> <span class="nav-text">截取返回字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置key的值并返回old-value"><span class="nav-number">3.1.4.</span> <span class="nav-text">设置key的值并返回old value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取指定偏移量"><span class="nav-number">3.1.5.</span> <span class="nav-text">获取指定偏移量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取所有key的值"><span class="nav-number">3.1.6.</span> <span class="nav-text">获取所有key的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置或清除指定偏移量"><span class="nav-number">3.1.7.</span> <span class="nav-text">设置或清除指定偏移量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过期时间"><span class="nav-number">3.1.8.</span> <span class="nav-text">过期时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key不存在时设置"><span class="nav-number">3.1.9.</span> <span class="nav-text">key不存在时设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆写key储存的字符串值"><span class="nav-number">3.1.10.</span> <span class="nav-text">覆写key储存的字符串值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串值的长度"><span class="nav-number">3.1.11.</span> <span class="nav-text">字符串值的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置多个key-value"><span class="nav-number">3.1.12.</span> <span class="nav-text">设置多个key-value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置多个不存在key-value"><span class="nav-number">3.1.13.</span> <span class="nav-text">设置多个不存在key-value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加毫秒生存时间"><span class="nav-number">3.1.14.</span> <span class="nav-text">增加毫秒生存时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#value-1"><span class="nav-number">3.1.15.</span> <span class="nav-text">value+1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#value-加上给定的增量值"><span class="nav-number">3.1.16.</span> <span class="nav-text">value 加上给定的增量值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#value-加上浮点增量值"><span class="nav-number">3.1.17.</span> <span class="nav-text">value 加上浮点增量值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#value-1-1"><span class="nav-number">3.1.18.</span> <span class="nav-text">value-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#value减去给定的减量值"><span class="nav-number">3.1.19.</span> <span class="nav-text">value减去给定的减量值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#追加"><span class="nav-number">3.1.20.</span> <span class="nav-text">追加</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash-哈希"><span class="nav-number">3.2.</span> <span class="nav-text">hash (哈希)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除多个value"><span class="nav-number">3.2.1.</span> <span class="nav-text">删除多个value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是否存在"><span class="nav-number">3.2.2.</span> <span class="nav-text">是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取字段的值"><span class="nav-number">3.2.3.</span> <span class="nav-text">获取字段的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取所有的field-value"><span class="nav-number">3.2.4.</span> <span class="nav-text">获取所有的field-value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数值加上增量"><span class="nav-number">3.2.5.</span> <span class="nav-text">整数值加上增量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数值加上增量"><span class="nav-number">3.2.6.</span> <span class="nav-text">浮点数值加上增量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取所有field"><span class="nav-number">3.2.7.</span> <span class="nav-text">获取所有field</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取字段的数量"><span class="nav-number">3.2.8.</span> <span class="nav-text">获取字段的数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取字段的值-1"><span class="nav-number">3.2.9.</span> <span class="nav-text">获取字段的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置多个field-value"><span class="nav-number">3.2.10.</span> <span class="nav-text">设置多个field-value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置一个field-value"><span class="nav-number">3.2.11.</span> <span class="nav-text">设置一个field-value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#field不存在时设置值"><span class="nav-number">3.2.12.</span> <span class="nav-text">field不存在时设置值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取所有value"><span class="nav-number">3.2.13.</span> <span class="nav-text">获取所有value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代键值对"><span class="nav-number">3.2.14.</span> <span class="nav-text">迭代键值对</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-列表"><span class="nav-number">3.3.</span> <span class="nav-text">list (列表)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BLPOP-key1-key2-timeout"><span class="nav-number">3.3.1.</span> <span class="nav-text">BLPOP key1 [key2 ] timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BRPOP-key1-key2-timeout"><span class="nav-number">3.3.2.</span> <span class="nav-text">BRPOP key1 [key2 ] timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BRPOPLPUSH-source-destination-timeout"><span class="nav-number">3.3.3.</span> <span class="nav-text">BRPOPLPUSH source destination timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过索引获取元素"><span class="nav-number">3.3.4.</span> <span class="nav-text">通过索引获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在元素前或者后插入元素"><span class="nav-number">3.3.5.</span> <span class="nav-text">在元素前或者后插入元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取列表长度"><span class="nav-number">3.3.6.</span> <span class="nav-text">获取列表长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移出并获取第一个元素"><span class="nav-number">3.3.7.</span> <span class="nav-text">移出并获取第一个元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表头部插入"><span class="nav-number">3.3.8.</span> <span class="nav-text">列表头部插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表头部插入一个值"><span class="nav-number">3.3.9.</span> <span class="nav-text">列表头部插入一个值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取列表范围内的元素"><span class="nav-number">3.3.10.</span> <span class="nav-text">获取列表范围内的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除列表元素"><span class="nav-number">3.3.11.</span> <span class="nav-text">移除列表元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过索引设置元素的值"><span class="nav-number">3.3.12.</span> <span class="nav-text">通过索引设置元素的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缩短key-list的值"><span class="nav-number">3.3.13.</span> <span class="nav-text">缩短key list的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除并获取最后一个元素"><span class="nav-number">3.3.14.</span> <span class="nav-text">移除并获取最后一个元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPOPLPUSH-source-destination"><span class="nav-number">3.3.15.</span> <span class="nav-text">RPOPLPUSH source destination</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加多个值"><span class="nav-number">3.3.16.</span> <span class="nav-text">添加多个值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#已存在的列表添加值"><span class="nav-number">3.3.17.</span> <span class="nav-text">已存在的列表添加值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-集合"><span class="nav-number">3.4.</span> <span class="nav-text">set (集合)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加多个成员"><span class="nav-number">3.4.1.</span> <span class="nav-text">添加多个成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合的成员数"><span class="nav-number">3.4.2.</span> <span class="nav-text">集合的成员数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合的差集"><span class="nav-number">3.4.3.</span> <span class="nav-text">集合的差集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有集合的差集并存储在-destination-中"><span class="nav-number">3.4.4.</span> <span class="nav-text">所有集合的差集并存储在 destination 中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合的交集"><span class="nav-number">3.4.5.</span> <span class="nav-text">集合的交集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合的交集并存储在-destination-中"><span class="nav-number">3.4.6.</span> <span class="nav-text">集合的交集并存储在 destination 中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断元素是否在key集合中"><span class="nav-number">3.4.7.</span> <span class="nav-text">判断元素是否在key集合中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回所有成员"><span class="nav-number">3.4.8.</span> <span class="nav-text">返回所有成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将元素从key集合移动到key2集合"><span class="nav-number">3.4.9.</span> <span class="nav-text">将元素从key集合移动到key2集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除并返回一个随机元素"><span class="nav-number">3.4.10.</span> <span class="nav-text">移除并返回一个随机元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回集合多个随机数"><span class="nav-number">3.4.11.</span> <span class="nav-text">返回集合多个随机数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除集合多个成员"><span class="nav-number">3.4.12.</span> <span class="nav-text">移除集合多个成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回所有集合的并集"><span class="nav-number">3.4.13.</span> <span class="nav-text">返回所有集合的并集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有给定集合的并集存储在-destination-集合中"><span class="nav-number">3.4.14.</span> <span class="nav-text">所有给定集合的并集存储在 destination 集合中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代集合中的元素"><span class="nav-number">3.4.15.</span> <span class="nav-text">迭代集合中的元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zset-sorted-set-有序集合"><span class="nav-number">3.5.</span> <span class="nav-text">zset (sorted set 有序集合)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ZADD-key-score1-member1-score2-member2"><span class="nav-number">3.5.1.</span> <span class="nav-text">ZADD key score1 member1 [score2 member2]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZCARD-key"><span class="nav-number">3.5.2.</span> <span class="nav-text">ZCARD key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZCOUNT-key-min-max"><span class="nav-number">3.5.3.</span> <span class="nav-text">ZCOUNT key min max</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZINCRBY-key-increment-member"><span class="nav-number">3.5.4.</span> <span class="nav-text">ZINCRBY key increment member</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZINTERSTORE-destination-numkeys-key-key"><span class="nav-number">3.5.5.</span> <span class="nav-text">ZINTERSTORE destination numkeys key [key ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZLEXCOUNT-key-min-max"><span class="nav-number">3.5.6.</span> <span class="nav-text">ZLEXCOUNT key min max</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRANGE-key-start-stop-WITHSCORES"><span class="nav-number">3.5.7.</span> <span class="nav-text">ZRANGE key start stop [WITHSCORES]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRANGEBYLEX-key-min-max-LIMIT-offset-count"><span class="nav-number">3.5.8.</span> <span class="nav-text">ZRANGEBYLEX key min max [LIMIT offset count]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRANGEBYSCORE-key-min-max-WITHSCORES-LIMIT"><span class="nav-number">3.5.9.</span> <span class="nav-text">ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRANK-key-member"><span class="nav-number">3.5.10.</span> <span class="nav-text">ZRANK key member</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREM-key-member-member"><span class="nav-number">3.5.11.</span> <span class="nav-text">ZREM key member [member ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREMRANGEBYLEX-key-min-max"><span class="nav-number">3.5.12.</span> <span class="nav-text">ZREMRANGEBYLEX key min max</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREMRANGEBYRANK-key-start-stop"><span class="nav-number">3.5.13.</span> <span class="nav-text">ZREMRANGEBYRANK key start stop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREMRANGEBYSCORE-key-min-max"><span class="nav-number">3.5.14.</span> <span class="nav-text">ZREMRANGEBYSCORE key min max</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREVRANGE-key-start-stop-WITHSCORES"><span class="nav-number">3.5.15.</span> <span class="nav-text">ZREVRANGE key start stop [WITHSCORES]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREVRANGEBYSCORE-key-max-min-WITHSCORES"><span class="nav-number">3.5.16.</span> <span class="nav-text">ZREVRANGEBYSCORE key max min [WITHSCORES]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZREVRANK-key-member"><span class="nav-number">3.5.17.</span> <span class="nav-text">ZREVRANK key member</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZSCORE-key-member"><span class="nav-number">3.5.18.</span> <span class="nav-text">ZSCORE key member</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZUNIONSTORE-destination-numkeys-key-key"><span class="nav-number">3.5.19.</span> <span class="nav-text">ZUNIONSTORE destination numkeys key [key ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZSCAN-key-cursor-MATCH-pattern-COUNT-count"><span class="nav-number">3.5.20.</span> <span class="nav-text">ZSCAN key cursor [MATCH pattern] [COUNT count]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HyperLogLog-结构"><span class="nav-number">3.6.</span> <span class="nav-text">HyperLogLog 结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PFADD-key-element-element"><span class="nav-number">3.6.1.</span> <span class="nav-text">PFADD key element [element ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PFCOUNT-key-key"><span class="nav-number">3.6.2.</span> <span class="nav-text">PFCOUNT key [key ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PFMERGE-destkey-sourcekey-sourcekey"><span class="nav-number">3.6.3.</span> <span class="nav-text">PFMERGE destkey sourcekey [sourcekey ...]</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用操作"><span class="nav-number">4.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接命令"><span class="nav-number">4.1.</span> <span class="nav-text">连接命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ping"><span class="nav-number">4.1.1.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-cli-h-host-p-port-a-password"><span class="nav-number">4.1.2.</span> <span class="nav-text">redis-cli -h host -p port -a password</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AUTH-password"><span class="nav-number">4.1.3.</span> <span class="nav-text">AUTH password</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ECHO-message"><span class="nav-number">4.1.4.</span> <span class="nav-text">ECHO message</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QUIT"><span class="nav-number">4.1.5.</span> <span class="nav-text">QUIT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-index"><span class="nav-number">4.1.6.</span> <span class="nav-text">SELECT index</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端连接命令"><span class="nav-number">4.2.</span> <span class="nav-text">客户端连接命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-LIST"><span class="nav-number">4.2.1.</span> <span class="nav-text">CLIENT LIST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-SETNAME"><span class="nav-number">4.2.2.</span> <span class="nav-text">CLIENT SETNAME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-GETNAME"><span class="nav-number">4.2.3.</span> <span class="nav-text">CLIENT GETNAME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-PAUSE"><span class="nav-number">4.2.4.</span> <span class="nav-text">CLIENT PAUSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-KILL"><span class="nav-number">4.2.5.</span> <span class="nav-text">CLIENT KILL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器命令"><span class="nav-number">4.3.</span> <span class="nav-text">服务器命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BGREWRITEAOF"><span class="nav-number">4.3.1.</span> <span class="nav-text">BGREWRITEAOF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BGSAVE"><span class="nav-number">4.3.2.</span> <span class="nav-text">BGSAVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-KILL-ip-port-ID-client-id"><span class="nav-number">4.3.3.</span> <span class="nav-text">CLIENT KILL [ip:port] [ID client-id]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-LIST-1"><span class="nav-number">4.3.4.</span> <span class="nav-text">CLIENT LIST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-GETNAME-1"><span class="nav-number">4.3.5.</span> <span class="nav-text">CLIENT GETNAME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-PAUSE-timeout"><span class="nav-number">4.3.6.</span> <span class="nav-text">CLIENT PAUSE timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT-SETNAME-connection-name"><span class="nav-number">4.3.7.</span> <span class="nav-text">CLIENT SETNAME connection-name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLUSTER-SLOTS"><span class="nav-number">4.3.8.</span> <span class="nav-text">CLUSTER SLOTS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COMMAND"><span class="nav-number">4.3.9.</span> <span class="nav-text">COMMAND</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COMMAND-COUNT"><span class="nav-number">4.3.10.</span> <span class="nav-text">COMMAND COUNT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COMMAND-GETKEYS"><span class="nav-number">4.3.11.</span> <span class="nav-text">COMMAND GETKEYS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TIME"><span class="nav-number">4.3.12.</span> <span class="nav-text">TIME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COMMAND-INFO-command-name-command-name"><span class="nav-number">4.3.13.</span> <span class="nav-text">COMMAND INFO command-name [command-name ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONFIG-GET-parameter"><span class="nav-number">4.3.14.</span> <span class="nav-text">CONFIG GET parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONFIG-REWRITE"><span class="nav-number">4.3.15.</span> <span class="nav-text">CONFIG REWRITE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONFIG-SET-parameter-value"><span class="nav-number">4.3.16.</span> <span class="nav-text">CONFIG SET parameter value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONFIG-RESETSTAT"><span class="nav-number">4.3.17.</span> <span class="nav-text">CONFIG RESETSTAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DBSIZE"><span class="nav-number">4.3.18.</span> <span class="nav-text">DBSIZE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEBUG-OBJECT-key"><span class="nav-number">4.3.19.</span> <span class="nav-text">DEBUG OBJECT key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEBUG-SEGFAULT"><span class="nav-number">4.3.20.</span> <span class="nav-text">DEBUG SEGFAULT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FLUSHALL"><span class="nav-number">4.3.21.</span> <span class="nav-text">`FLUSHALL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FLUSHDB"><span class="nav-number">4.3.22.</span> <span class="nav-text">`FLUSHDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-section"><span class="nav-number">4.3.23.</span> <span class="nav-text">INFO [section]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LASTSAVE"><span class="nav-number">4.3.24.</span> <span class="nav-text">LASTSAVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MONITOR"><span class="nav-number">4.3.25.</span> <span class="nav-text">MONITOR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROLE"><span class="nav-number">4.3.26.</span> <span class="nav-text">ROLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAVE"><span class="nav-number">4.3.27.</span> <span class="nav-text">SAVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHUTDOWN-NOSAVE-SAVE"><span class="nav-number">4.3.28.</span> <span class="nav-text">SHUTDOWN [NOSAVE] [SAVE]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SLAVEOF-host-port"><span class="nav-number">4.3.29.</span> <span class="nav-text">SLAVEOF host port</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SLOWLOG-subcommand-argument"><span class="nav-number">4.3.30.</span> <span class="nav-text">SLOWLOG subcommand [argument]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SYNC"><span class="nav-number">4.3.31.</span> <span class="nav-text">SYNC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#键-key-的管理-COMMAND-KEY-NAME"><span class="nav-number">4.4.</span> <span class="nav-text">键(key)的管理 COMMAND KEY_NAME</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DEL-key"><span class="nav-number">4.4.1.</span> <span class="nav-text">DEL key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DUMP-key"><span class="nav-number">4.4.2.</span> <span class="nav-text">DUMP key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXISTS-key"><span class="nav-number">4.4.3.</span> <span class="nav-text">EXISTS key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPIRE-key-seconds"><span class="nav-number">4.4.4.</span> <span class="nav-text">EXPIRE key seconds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPIREAT-key-timestamp"><span class="nav-number">4.4.5.</span> <span class="nav-text">EXPIREAT key timestamp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PEXPIRE-key-milliseconds"><span class="nav-number">4.4.6.</span> <span class="nav-text">PEXPIRE key milliseconds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PEXPIREAT-key-milliseconds-timestamp"><span class="nav-number">4.4.7.</span> <span class="nav-text">PEXPIREAT key milliseconds-timestamp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KEYS-pattern"><span class="nav-number">4.4.8.</span> <span class="nav-text">KEYS pattern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOVE-key-db"><span class="nav-number">4.4.9.</span> <span class="nav-text">MOVE key db</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PERSIST-key"><span class="nav-number">4.4.10.</span> <span class="nav-text">PERSIST key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PTTL-key"><span class="nav-number">4.4.11.</span> <span class="nav-text">PTTL key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TTL-key"><span class="nav-number">4.4.12.</span> <span class="nav-text">TTL key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RANDOMKEY"><span class="nav-number">4.4.13.</span> <span class="nav-text">RANDOMKEY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RENAME-key-newkey"><span class="nav-number">4.4.14.</span> <span class="nav-text">RENAME key newkey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RENAMENX-key-newkey"><span class="nav-number">4.4.15.</span> <span class="nav-text">RENAMENX key newkey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TYPE-key"><span class="nav-number">4.4.16.</span> <span class="nav-text">TYPE key</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-发布订阅"><span class="nav-number">5.</span> <span class="nav-text">Redis 发布订阅</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-发布订阅操作示例"><span class="nav-number">5.1.</span> <span class="nav-text">Redis 发布订阅操作示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-发布订阅命令"><span class="nav-number">5.2.</span> <span class="nav-text">Redis 发布订阅命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PSUBSCRIBE-pattern-pattern"><span class="nav-number">5.2.1.</span> <span class="nav-text">PSUBSCRIBE pattern [pattern ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUBSUB-subcommand-argument-argument"><span class="nav-number">5.2.2.</span> <span class="nav-text">PUBSUB subcommand [argument [argument ...]]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUBLISH-channel-message"><span class="nav-number">5.2.3.</span> <span class="nav-text">PUBLISH channel message</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUNSUBSCRIBE-pattern-pattern"><span class="nav-number">5.2.4.</span> <span class="nav-text">PUNSUBSCRIBE [pattern [pattern ...]]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUBSCRIBE-channel-channel"><span class="nav-number">5.2.5.</span> <span class="nav-text">SUBSCRIBE channel [channel ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNSUBSCRIBE-channel-channel"><span class="nav-number">5.2.6.</span> <span class="nav-text">UNSUBSCRIBE [channel [channel ...]]</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-事物"><span class="nav-number">6.</span> <span class="nav-text">Redis 事物</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例操作"><span class="nav-number">6.1.</span> <span class="nav-text">示例操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis事物命令"><span class="nav-number">6.2.</span> <span class="nav-text">Redis事物命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DISCARD"><span class="nav-number">6.2.1.</span> <span class="nav-text">DISCARD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXEC"><span class="nav-number">6.2.2.</span> <span class="nav-text">EXEC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MULTI"><span class="nav-number">6.2.3.</span> <span class="nav-text">MULTI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNWATCH"><span class="nav-number">6.2.4.</span> <span class="nav-text">UNWATCH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WATCH-key-key"><span class="nav-number">6.2.5.</span> <span class="nav-text">WATCH key [key ...]</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-脚本"><span class="nav-number">7.</span> <span class="nav-text">Redis 脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">7.1.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">7.2.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EVAL-script-numkeys-key-key-arg-arg"><span class="nav-number">7.2.1.</span> <span class="nav-text">EVAL script numkeys key [key ...] arg [arg ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EVALSHA-sha1-numkeys-key-key-arg-arg"><span class="nav-number">7.2.2.</span> <span class="nav-text">EVALSHA sha1 numkeys key [key ...] arg [arg ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCRIPT-EXISTS-script-script"><span class="nav-number">7.2.3.</span> <span class="nav-text">SCRIPT EXISTS script [script ...]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCRIPT-FLUSH"><span class="nav-number">7.2.4.</span> <span class="nav-text">SCRIPT FLUSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCRIPT-KILL"><span class="nav-number">7.2.5.</span> <span class="nav-text">SCRIPT KILL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCRIPT-LOAD-script"><span class="nav-number">7.2.6.</span> <span class="nav-text">SCRIPT LOAD script</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-高级操作"><span class="nav-number">8.</span> <span class="nav-text">Redis 高级操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据备份与恢复"><span class="nav-number">8.1.</span> <span class="nav-text">数据备份与恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#备份"><span class="nav-number">8.1.1.</span> <span class="nav-text">备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恢复"><span class="nav-number">8.1.2.</span> <span class="nav-text">恢复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-安全"><span class="nav-number">9.</span> <span class="nav-text">Redis 安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置密码与获取密码"><span class="nav-number">9.1.</span> <span class="nav-text">设置密码与获取密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证密码"><span class="nav-number">9.2.</span> <span class="nav-text">验证密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能测试"><span class="nav-number">10.</span> <span class="nav-text">性能测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令与参数解释："><span class="nav-number">10.1.</span> <span class="nav-text">命令与参数解释：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-管道技术"><span class="nav-number">11.</span> <span class="nav-text">Redis 管道技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">11.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优势"><span class="nav-number">11.2.</span> <span class="nav-text">优势</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-分区"><span class="nav-number">12.</span> <span class="nav-text">Redis 分区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分区的优势"><span class="nav-number">12.1.</span> <span class="nav-text">分区的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区的不足"><span class="nav-number">12.2.</span> <span class="nav-text">分区的不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区类型"><span class="nav-number">12.3.</span> <span class="nav-text">分区类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#范围分区"><span class="nav-number">12.3.1.</span> <span class="nav-text">范围分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希分区"><span class="nav-number">12.3.2.</span> <span class="nav-text">哈希分区</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-使用Redis"><span class="nav-number">13.</span> <span class="nav-text">java 使用Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接到redis服务"><span class="nav-number">13.1.</span> <span class="nav-text">连接到redis服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Java-String-字符串-实例"><span class="nav-number">13.2.</span> <span class="nav-text">Redis Java String(字符串) 实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Java-List-列表-实例"><span class="nav-number">13.3.</span> <span class="nav-text">Redis Java List(列表) 实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Java-Keys-实例"><span class="nav-number">13.4.</span> <span class="nav-text">Redis Java Keys 实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhaoliang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

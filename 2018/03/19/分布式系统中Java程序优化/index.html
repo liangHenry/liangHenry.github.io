@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java程序优化," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分布式系统中Java程序优化选取图书《大型分布式网站架构设计与实践》 单例对于I/O处理、数据库连接、配置文件解析加载等一些非常消耗资源的操作，我们必须对这些势力的创建进行限制，或者始终使用过一个公共的实例，以节约系统开销，这种情况下就需要使用单例模式。   12345678910public class Singleton &amp;#123;    private static Singleton i">
+<meta name="keywords" content="Java程序优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式系统中Java程序优化">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/分布式系统中Java程序优化/index.html">
+<meta property="og:site_name" content="liang_henry&#39;s blog">
+<meta property="og:description" content="分布式系统中Java程序优化选取图书《大型分布式网站架构设计与实践》 单例对于I/O处理、数据库连接、配置文件解析加载等一些非常消耗资源的操作，我们必须对这些势力的创建进行限制，或者始终使用过一个公共的实例，以节约系统开销，这种情况下就需要使用单例模式。   12345678910public class Singleton &amp;#123;    private static Singleton i">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-19T06:43:46.358Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式系统中Java程序优化">
+<meta name="twitter:description" content="分布式系统中Java程序优化选取图书《大型分布式网站架构设计与实践》 单例对于I/O处理、数据库连接、配置文件解析加载等一些非常消耗资源的操作，我们必须对这些势力的创建进行限制，或者始终使用过一个公共的实例，以节约系统开销，这种情况下就需要使用单例模式。   12345678910public class Singleton &amp;#123;    private static Singleton i">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/19/分布式系统中Java程序优化/"/>
+
+
+
+
+
+  <title>分布式系统中Java程序优化 | liang_henry's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liang_henry's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/分布式系统中Java程序优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liang_henry's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分布式系统中Java程序优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-19T10:18:36+00:00">
+                2018-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/分布式/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="分布式系统中Java程序优化"><a href="#分布式系统中Java程序优化" class="headerlink" title="分布式系统中Java程序优化"></a>分布式系统中Java程序优化</h1><p>选取图书《大型分布式网站架构设计与实践》</p>
+<h2 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h2><p>对于I/O处理、数据库连接、配置文件解析加载等一些非常消耗资源的操作，我们必须对这些势力的创建进行限制，或者始终使用过一个公共的实例，以节约系统开销，这种情况下就需要使用单例模式。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">    private static Singleton instance;</span><br><span class="line">    static&#123;</span><br><span class="line">        instance=new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line">    private Singleton()&#123;&#125;</span><br><span class="line">    public static Singleton getInstance() &#123;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>“饿汉”式的单例模式在类加载时进行Singleton对象的实例化，通过在构造函数中执行消耗资源的初始化操作，将构造函数设置为私有，使得外部不能够实例化对象，只能够通过getInstance方法来获得单例。<br><a id="more"></a></p>
+<h2 id="Future模式"><a href="#Future模式" class="headerlink" title="Future模式"></a>Future模式</h2><p>假设一个任务执行起来需要花费一些时间，为了省去不必要的等待时间，可以先获取一个“提货单”，即Future，然后继续处理别的任务，直到”货物”到达，即任务执行完得到结果，此时便可以用”提货单”进行提货，即通过Future对象的到返回值。<br>如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TestFuture &#123;</span><br><span class="line">    static class Job&lt;Object&gt; implements Callable&lt;Object&gt; &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public Object call() throws Exception &#123;</span><br><span class="line">            return loadData();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private Object loadData() &#123;</span><br><span class="line">            //do something</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) throws ExecutionException, InterruptedException &#123;</span><br><span class="line">        FutureTask&lt;Object&gt; futureTask=new FutureTask&lt;Object&gt;(new Job&lt;&gt;());</span><br><span class="line">        new Thread(futureTask).start();</span><br><span class="line">        //do something else</span><br><span class="line">        Object result=(Object) futureTask.get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>FutureTask类实现了Future和Runnalbe 借口，FutureTask开始后，loadData()执行可能较长，因此可以先处理其他事情，等其他实情处理好之后，再通过futureTask.get()来获取结果，如果loadData()还未执行完毕，则此时县城会阻塞等待。</p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>有些时候程序执行慢是因为没有充分利用硬件资源，比如，明明是多核CPU，但是程序中却使用单现场串行操作，这种情况下可以将原来的串行操作改为多线程并发，以提高效率。  </p>
+<p>但是在生产环节中，如果为每一个任务创建一个线程，将导致大量的线程呗创建，线程创建和销毁本事是有一定代价的，并且活跃的线程会消耗一定的系统资源，如内存。如果课运行线程的可比处理器数量要多，则会有线程闲置，而闲置的线程就会导致内存空间的浪费，并且如果并发树太高，占内存过多，还有可能OutOfMemory.  </p>
+<p>这时可以用线程池，代码如下：    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class TestExecutorService &#123;</span><br><span class="line">    static class Job implements Runnable&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            doWork();</span><br><span class="line">        &#125;</span><br><span class="line">        private void doWork() &#123;</span><br><span class="line">            System.out.println(&quot;doing...&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ExecutorService exec= Executors.newFixedThreadPool(5);</span><br><span class="line">        for (int i=0;i&lt;10;i++)</span><br><span class="line">            exec.execute(new Job());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用线程池将互不依赖的几个动作切分，通过线程对串行工作进行改进，将成倍地提高工作效率。  </p>
+<h2 id="选择就绪"><a href="#选择就绪" class="headerlink" title="选择就绪"></a>选择就绪</h2><p>JDK 自1.4起开始提供全新的I/O编程类库，简称NIO，其不但引入了全新的高效的Buffer和Channel,同时还引入了基于Selector的非阻塞I/O机制，将多个异步的I/O操作集中到一个或几个线程当中进行处理。使用NIO代理阻塞I/O能提高程序的并发吞吐能力，降低系统的开销。  </p>
+<p>举例说明，假如客户端需要与服务器进行通信，给服务发送hello：   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Socket client = new Socket(&quot;127.0.0.1&quot;, 9999);</span><br><span class="line">OutputStream outputStream=client.getOutputStream();</span><br><span class="line">String hello=&quot;hello!&quot;;</span><br><span class="line">outputStream.write(hello.getBytes());</span><br><span class="line">outputStream.flush();</span><br><span class="line">outputStream.close();</span><br></pre></td></tr></table></figure>
+<p>JDK1.4 以前是阻塞的I/O ，服务端一半的处理方式如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws IOException &#123;</span><br><span class="line">    ServerSocket server = new ServerSocket(9999);</span><br><span class="line">    while (true) &#123;</span><br><span class="line">        Socket s = server.accept();</span><br><span class="line">        new Thread(new ProcessJob(s)).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">static class ProcessJob implements Runnable &#123;</span><br><span class="line">    private Socket s;</span><br><span class="line">    public ProcessJob(Socket s) &#123;</span><br><span class="line">        this.s = s;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        byte[] b = new byte[1024];</span><br><span class="line">        try &#123;</span><br><span class="line">            while ((count = s.getInputStream().read(b)) &gt; 0) &#123;</span><br><span class="line">                System.out.write(b, 0, count);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于每一个请求，单独开一个线程进行相应的逻辑处理，如果客户端的数据传递并不是一直进行，而是断断续续的，则相应的线程需要I/O等待，并进行上下文切换。</p>
+<p>使用NIO引入Selector机制后，可以提升程序的并发效率。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">static class AcceptJob implements Runnable &#123;</span><br><span class="line"></span><br><span class="line">    private Selector clientSelector;</span><br><span class="line">    private Selector serverSelector;</span><br><span class="line"></span><br><span class="line">    public AcceptJob(Selector clientSelector, Selector serverSelector) &#123;</span><br><span class="line">        this.clientSelector = clientSelector;</span><br><span class="line">        this.serverSelector = serverSelector;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line"></span><br><span class="line">            while (true) &#123;</span><br><span class="line">                int n = serverSelector.selectNow();</span><br><span class="line">                if (n &lt;= 0) continue;</span><br><span class="line">                Iterator&lt;SelectionKey&gt; it = serverSelector.selectedKeys().iterator();</span><br><span class="line">                while (it.hasNext()) &#123;</span><br><span class="line">                    SelectionKey key = it.next();</span><br><span class="line"></span><br><span class="line">                    if (key.isAcceptable()) &#123;</span><br><span class="line">                        ServerSocketChannel server = (ServerSocketChannel) key.channel();</span><br><span class="line">                        SocketChannel channel = server.accept();</span><br><span class="line">                        channel.configureBlocking(false);</span><br><span class="line">                        channel.register(clientSelector, SelectionKey.OP_READ);</span><br><span class="line">                    &#125;</span><br><span class="line">                    it.remove();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static class ProcessJob implements Runnable &#123;</span><br><span class="line">    private Selector clientSelector;</span><br><span class="line"></span><br><span class="line">    public ProcessJob(Selector clientSelector) &#123;</span><br><span class="line">        this.clientSelector = clientSelector;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        ByteBuffer bb = ByteBuffer.allocate(1024);</span><br><span class="line">        try &#123;</span><br><span class="line">            while (true) &#123;</span><br><span class="line">                int n = clientSelector.selectNow();</span><br><span class="line">                if (n &lt;= 0) continue;</span><br><span class="line">                Iterator&lt;SelectionKey&gt; it = clientSelector.selectedKeys().iterator();</span><br><span class="line">                while (it.hasNext()) &#123;</span><br><span class="line">                    SelectionKey key = it.next();</span><br><span class="line"></span><br><span class="line">                    if (key.isReadable()) &#123;</span><br><span class="line">                        SocketChannel client = (SocketChannel) key.channel();</span><br><span class="line">                        while ((count = client.read(bb)) &gt; 0) &#123;</span><br><span class="line">                            System.out.write(bb.array(), 0, count);</span><br><span class="line">                            bb.clear();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    it.remove();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) throws IOException &#123;</span><br><span class="line">    Selector clientSelector = Selector.open();</span><br><span class="line">    Selector serverSelector = Selector.open();</span><br><span class="line"></span><br><span class="line">    ServerSocketChannel serverChannel = ServerSocketChannel.open();</span><br><span class="line">    ServerSocket serverSocket = serverChannel.socket();</span><br><span class="line">    serverChannel.bind(new InetSocketAddress(9999));</span><br><span class="line">    serverChannel.configureBlocking(false);</span><br><span class="line">    serverChannel.register(serverSelector, SelectionKey.OP_ACCEPT);</span><br><span class="line"></span><br><span class="line">    AcceptJob acceptJob = new AcceptJob(clientSelector, serverSelector);</span><br><span class="line">    ProcessJob processJob = new ProcessJob(clientSelector);</span><br><span class="line">    Thread acceptThread = new Thread(acceptJob);</span><br><span class="line">    Thread processThread = new Thread(processJob);</span><br><span class="line">    acceptThread.start();</span><br><span class="line">    processThread.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>AcceptJob 负责接收新的请求，而ProcessJob负责具体的请求处理，通过clientSelector.selectNow()能够判断目前是否有客户端就绪，而clientSelector.selectedKeys().iterator()能够对当前已经就绪的客户端进行迭代。只有当客户端就绪时，如SelectionKey.isReadable()为true时，ProcessJob才会进行相应的I/O处理。Selector机制使得线程不必等待客户端的I/O就绪，当客户端还没有就绪时，可以处理其他请求，提高服务器的并发吞吐能力，降低了资源消耗。</p>
+<h2 id="减少上下文切换"><a href="#减少上下文切换" class="headerlink" title="减少上下文切换"></a>减少上下文切换</h2><p>锁的竞争会使得更多的线程等待，本来并行的操作变为串行，并且会导致上下文频繁地切换。因此，减少锁的竞争能够提高程序的性能。<br>降低锁竞争的一种有效的方式是尽可能地缩短锁持有的时间，比如可以将一部分的锁无关的代码移出同步代码块，特别是执行起来开销较大的操作，以及可能使当前线程被阻塞的操作。<br>举例来说，假设一个计算器，对当前正在执行的Job进行计数，当Job开始执行时，计算器加1，当Job执行完毕后，计算器减1，一种实现方式如下：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">static class RunningCount &#123;</span><br><span class="line">    private Integer runningCount = 0;</span><br><span class="line"></span><br><span class="line">    public synchronized void run(Job job) &#123;</span><br><span class="line">        runningCount++;</span><br><span class="line">        doSomething(job);</span><br><span class="line">        runningCount--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void doSomething(Job job) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>runningCount表示当前正在运行的Job数量，给run()方法加上同步关键子，使得线程不仅需要等待runningCount++和runningCount–操作，还需要等待doSomething()方法的执行，而doSomething()方法又比较消耗时，这样单个线程锁的持有时间将会很长，通过改进，代码的实现如下：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">static class RunningCount &#123;</span><br><span class="line">    private Integer runningCount = 0;</span><br><span class="line"></span><br><span class="line">    public void run(Job job) &#123;</span><br><span class="line">        synchronized (runningCount)&#123;</span><br><span class="line">            runningCount++;</span><br><span class="line">        &#125;</span><br><span class="line">        doSomething(job);</span><br><span class="line">        synchronized (runningCount) &#123;</span><br><span class="line">            runningCount--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void doSomething(Job job) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在run()方法中，只对runningCount对象加锁，当runningCount的++或者–操作执行完毕后，锁迅速释放，以减少其它线程的等待时间。<br>另一种减小锁持有时间的方式是减小锁的粒度，将原先使用单独锁来保护的多个变量采用多个相互独立的锁分别进行保护，这样就能降低线程请求锁的几率，从而减少竞争发生的可能性。当然，使用的锁越多，发生死锁的风险就越高。<br>举例来说，假设某站点需要进行投票，统计喜欢平的人数和喜欢梨的人数，并且在投票完成以后改变选择，取消之前的操作，一种实现方式如下：   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class LikeCount &#123;</span><br><span class="line"></span><br><span class="line">    private Integer likeApple = 0;</span><br><span class="line">    private Integer likePear = 0;</span><br><span class="line"></span><br><span class="line">    public synchronized void likeApple() &#123;</span><br><span class="line">        likeApple++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void likePear() &#123;</span><br><span class="line">        likePear++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void unlikeApple() &#123;</span><br><span class="line">        likeApple--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void unlikePear() &#123;</span><br><span class="line">        likePear--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个变量likeApple和likePear分别代表喜欢苹果和喜欢梨，同步方法使得对likeApple的操作同时进行。由于LikeCount对象被锁，操作lifePear线程也必须等待，而实际上likeApple和likePear两个变量没有任何内在联系，因此可以将实现方式改为：  </p>
+<pre><code>class LikeCount {
+    //AtomicInteger;
+    private Integer likeApple = 0;
+    private Integer likePear = 0;
+    public void likeApple() {
+        synchronized (likeApple) {
+            likeApple++;
+        }
+    }
+    public void likePear() {
+        synchronized (likePear) {
+            likePear++;
+        }
+    }
+    public void unlikeApple() {
+        synchronized (likeApple) {
+            likeApple--;
+        }
+    }
+    public void unlikePear() {
+        synchronized (likePear) {
+            likePear--;
+        }
+    }
+}
+</code></pre><p>通过这种方式，将likeApple与likePear两个本身没有任何关系的变量解耦，在对likeApple进行操作的同时，也可以对likePear变量进行操作，提高了程序的吞吐。<br>第三种降低锁竞争的方式就是放弃使用独占锁，而使用其它更友好的并发方式来保障数据的同步,比如前文所提到的原子变量，或者是使用读写锁。读/写锁实现了多个读取操作的单个写入操作情况下的数据同步，对于读操作不会修改公共资源，因此在执行读操作时不需要进行加锁，而写入操作必须获得独占锁，以保障队公共资源的修改不会出错。对于多读少写的情况，使用读写锁能够比使用独占锁提供更高的并发数量。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java程序优化/" rel="tag"># Java程序优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/16/CentOS7安装RabbitMQ3.7/" rel="next" title="CentOS 7 安装 RabbitMQ 3.7">
+                <i class="fa fa-chevron-left"></i> CentOS 7 安装 RabbitMQ 3.7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhaoliang</p>
+              <p class="site-description motion-element" itemprop="description">有些事并不是看到希望才去坚持，而是坚持了才会看到希望</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liangHenry" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cczhaoliang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/liang_henry" target="_blank" title="csdn">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>csdn</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式系统中Java程序优化"><span class="nav-number">1.</span> <span class="nav-text">分布式系统中Java程序优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例"><span class="nav-number">1.1.</span> <span class="nav-text">单例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future模式"><span class="nav-number">1.2.</span> <span class="nav-text">Future模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">1.3.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择就绪"><span class="nav-number">1.4.</span> <span class="nav-text">选择就绪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少上下文切换"><span class="nav-number">1.5.</span> <span class="nav-text">减少上下文切换</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhaoliang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

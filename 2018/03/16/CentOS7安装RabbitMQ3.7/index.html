@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="RabbitMQ," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CentOS 7 安装 RabbitMQ 3.7安装Erlang安装依赖1sudo yum install -y gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git 创建yum源 参考：(https://github.com/rabbitmq/erlang-rp">
+<meta name="keywords" content="RabbitMQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7 安装 RabbitMQ 3.7">
+<meta property="og:url" content="http://yoursite.com/2018/03/16/CentOS7安装RabbitMQ3.7/index.html">
+<meta property="og:site_name" content="liang_henry&#39;s blog">
+<meta property="og:description" content="CentOS 7 安装 RabbitMQ 3.7安装Erlang安装依赖1sudo yum install -y gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git 创建yum源 参考：(https://github.com/rabbitmq/erlang-rp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-19T06:43:46.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS 7 安装 RabbitMQ 3.7">
+<meta name="twitter:description" content="CentOS 7 安装 RabbitMQ 3.7安装Erlang安装依赖1sudo yum install -y gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git 创建yum源 参考：(https://github.com/rabbitmq/erlang-rp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/16/CentOS7安装RabbitMQ3.7/"/>
+
+
+
+
+
+  <title>CentOS 7 安装 RabbitMQ 3.7 | liang_henry's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liang_henry's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/16/CentOS7安装RabbitMQ3.7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhaoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liang_henry's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CentOS 7 安装 RabbitMQ 3.7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T17:18:36+00:00">
+                2018-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS-7/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS 7</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="CentOS-7-安装-RabbitMQ-3-7"><a href="#CentOS-7-安装-RabbitMQ-3-7" class="headerlink" title="CentOS 7 安装 RabbitMQ 3.7"></a>CentOS 7 安装 RabbitMQ 3.7</h1><h2 id="安装Erlang"><a href="#安装Erlang" class="headerlink" title="安装Erlang"></a>安装Erlang</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git</span><br></pre></td></tr></table></figure>
+<h3 id="创建yum源-参考：-https-github-com-rabbitmq-erlang-rpm"><a href="#创建yum源-参考：-https-github-com-rabbitmq-erlang-rpm" class="headerlink" title="创建yum源 参考：(https://github.com/rabbitmq/erlang-rpm)"></a>创建yum源 参考：(<a href="https://github.com/rabbitmq/erlang-rpm" target="_blank" rel="noopener">https://github.com/rabbitmq/erlang-rpm</a>)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/yum.repos.d/rabbitmq-erlang.repo</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="添加内容"><a href="#添加内容" class="headerlink" title="添加内容"></a>添加内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[rabbitmq-erlang]</span><br><span class="line">name=rabbitmq-erlang</span><br><span class="line">baseurl=https://dl.bintray.com/rabbitmq/rpm/erlang/20/el/7</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc</span><br><span class="line">repo_gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y erlang</span><br></pre></td></tr></table></figure>
+<h3 id="进入erlang命令行表示成功"><a href="#进入erlang命令行表示成功" class="headerlink" title="进入erlang命令行表示成功"></a>进入erlang命令行表示成功</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">erl</span><br></pre></td></tr></table></figure>
+<h2 id="安装-socat"><a href="#安装-socat" class="headerlink" title="安装 socat"></a>安装 socat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y socat</span><br></pre></td></tr></table></figure>
+<h2 id="RabbitMQ-安装"><a href="#RabbitMQ-安装" class="headerlink" title="RabbitMQ 安装"></a>RabbitMQ 安装</h2><p>官网下载地址：<a href="https://www.rabbitmq.com/install-rpm.html" target="_blank" rel="noopener">https://www.rabbitmq.com/install-rpm.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.4/rabbitmq-server-3.7.4-1.el7.noarch.rpm</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果遇到erlang已安装且版本正确，但是RabbitMQ检测失败的情况<br>可以追加参数 —nodeps （不验证软件包依赖）</p>
+</blockquote>
+<h3 id="systemctl-操作-RabbitMQ服务"><a href="#systemctl-操作-RabbitMQ服务" class="headerlink" title="systemctl 操作 RabbitMQ服务"></a>systemctl 操作 RabbitMQ服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl start rabbitmq-server</span><br><span class="line">systemctl status rabbitmq-server</span><br><span class="line">systemctl restart rabbitmq-server</span><br><span class="line">#设置为开机启动</span><br><span class="line">systemctl enable rabbitmq-server</span><br></pre></td></tr></table></figure>
+<p>###开放端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#增加rabbitMQ端口：5672</span><br><span class="line">sudo firewall-cmd --add-port=5672/tcp --permanent</span><br><span class="line">#重新加载防火墙设置</span><br><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure></p>
+<h3 id="添加管理配置插件"><a href="#添加管理配置插件" class="headerlink" title="添加管理配置插件"></a>添加管理配置插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#安装web管理页面插件（先启动rabbitmq服务）：</span><br><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br><span class="line">#开放端口</span><br><span class="line">sudo firewall-cmd --add-port=15672/tcp --permanent</span><br><span class="line">#重新加载防火墙配置</span><br><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>访问安装好的服务器下的rabbitmq:<a href="http://localhost:15672/" target="_blank" rel="noopener">http://localhost:15672/</a> 账号和密码:guest guest</strong></p>
+</blockquote>
+<h2 id="Rabbit配置"><a href="#Rabbit配置" class="headerlink" title="Rabbit配置"></a>Rabbit配置</h2><p>###添加用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#添加用户</span><br><span class="line">sudo rabbitmqctl add_user admin passworld</span><br><span class="line">#设置用户角色</span><br><span class="line">sudo rabbitmqctl set_user_tags admin administrator</span><br><span class="line">#tag（administrator，monitoring，policymaker，management）</span><br><span class="line">#设置用户权限(接受来自所有Host的所有操作)</span><br><span class="line">sudo rabbitmqctl  set_permissions -p &quot;/&quot; admin &apos;.*&apos; &apos;.*&apos; &apos;.*&apos;  </span><br><span class="line">#查看用户权限</span><br><span class="line">sudo rabbitmqctl list_user_permissions admin</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置远程访问"><a href="#配置远程访问" class="headerlink" title="配置远程访问"></a>配置远程访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#修改配置文件</span><br><span class="line">sudo vi /etc/rabbitmq/rabbitmq.config </span><br><span class="line">#保存以下内容</span><br><span class="line">[</span><br><span class="line">&#123;rabbit, [&#123;tcp_listeners, [5672]&#125;, &#123;loopback_users, [&quot;admin&quot;]&#125;]&#125;</span><br><span class="line">].</span><br></pre></td></tr></table></figure>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p>##RabbitMQ常用命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 添加用户</span><br><span class="line">sudo rabbitmqctl add_user &lt;username&gt; &lt;password&gt;  </span><br><span class="line"># 删除用户</span><br><span class="line">sudo rabbitmqctl delete_user &lt;username&gt;  </span><br><span class="line"># 修改用户密码</span><br><span class="line">sudo rabbitmqctl change_password &lt;username&gt; &lt;newpassword&gt;  </span><br><span class="line"># 清除用户密码（该用户将不能使用密码登陆，但是可以通过SASL登陆如果配置了SASL认证）</span><br><span class="line">sudo rabbitmqctl clear_password &lt;username&gt; </span><br><span class="line"># 设置用户tags（相当于角色，包含administrator，monitoring，policymaker，management）</span><br><span class="line">sudo rabbitmqctl set_user_tags &lt;username&gt; &lt;tag&gt;</span><br><span class="line"># 列出所有用户</span><br><span class="line">sudo rabbitmqctl list_users  </span><br><span class="line"># 创建一个vhosts</span><br><span class="line">sudo rabbitmqctl add_vhost &lt;vhostpath&gt;  </span><br><span class="line"># 删除一个vhosts</span><br><span class="line">sudo rabbitmqctl delete_vhost &lt;vhostpath&gt;  </span><br><span class="line"># 列出vhosts</span><br><span class="line">sudo rabbitmqctl list_vhosts [&lt;vhostinfoitem&gt; ...]  </span><br><span class="line"># 针对一个vhosts给用户赋予相关权限；</span><br><span class="line">sudo rabbitmqctl set_permissions [-p &lt;vhostpath&gt;] &lt;user&gt; &lt;conf&gt; &lt;write&gt; &lt;read&gt;  </span><br><span class="line"># 清除一个用户对vhosts的权限；</span><br><span class="line">sudo rabbitmqctl clear_permissions [-p &lt;vhostpath&gt;] &lt;username&gt;  </span><br><span class="line"># 列出哪些用户可以访问该vhosts；</span><br><span class="line">sudo rabbitmqctl list_permissions [-p &lt;vhostpath&gt;]   </span><br><span class="line"># 列出用户访问权限；</span><br><span class="line">sudo rabbitmqctl list_user_permissions &lt;username&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a href="https://ken.io/note/centos7-rabbitmq-install-setup" target="_blank" rel="noopener">https://ken.io/note/centos7-rabbitmq-install-setup</a><br><a href="https://www.rabbitmq.com/download.html" target="_blank" rel="noopener">https://www.rabbitmq.com/download.html</a><br><a href="https://github.com/judasn/Linux-Tutorial/blob/master/RabbitMQ-Install-And-Settings.md" target="_blank" rel="noopener">https://github.com/judasn/Linux-Tutorial/blob/master/RabbitMQ-Install-And-Settings.md</a><br><a href="http://blog.csdn.net/zyz511919766/article/details/42292655" target="_blank" rel="noopener">http://blog.csdn.net/zyz511919766/article/details/42292655</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/16/CentOS7安装MongoDB3.6/" rel="next" title="CentOS 7 安装 MongoDB 3.6">
+                <i class="fa fa-chevron-left"></i> CentOS 7 安装 MongoDB 3.6
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/19/分布式系统中Java程序优化/" rel="prev" title="分布式系统中Java程序优化">
+                分布式系统中Java程序优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhaoliang</p>
+              <p class="site-description motion-element" itemprop="description">有些事并不是看到希望才去坚持，而是坚持了才会看到希望</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/liangHenry" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:cczhaoliang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/liang_henry" target="_blank" title="csdn">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>csdn</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS-7-安装-RabbitMQ-3-7"><span class="nav-number">1.</span> <span class="nav-text">CentOS 7 安装 RabbitMQ 3.7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Erlang"><span class="nav-number">1.1.</span> <span class="nav-text">安装Erlang</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建yum源-参考：-https-github-com-rabbitmq-erlang-rpm"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建yum源 参考：(https://github.com/rabbitmq/erlang-rpm)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加内容"><span class="nav-number">1.1.3.</span> <span class="nav-text">添加内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.4.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入erlang命令行表示成功"><span class="nav-number">1.1.5.</span> <span class="nav-text">进入erlang命令行表示成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-socat"><span class="nav-number">1.2.</span> <span class="nav-text">安装 socat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ-安装"><span class="nav-number">1.3.</span> <span class="nav-text">RabbitMQ 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#systemctl-操作-RabbitMQ服务"><span class="nav-number">1.3.1.</span> <span class="nav-text">systemctl 操作 RabbitMQ服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加管理配置插件"><span class="nav-number">1.3.2.</span> <span class="nav-text">添加管理配置插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rabbit配置"><span class="nav-number">1.4.</span> <span class="nav-text">Rabbit配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置远程访问"><span class="nav-number">1.4.1.</span> <span class="nav-text">配置远程访问</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备注"><span class="nav-number">2.</span> <span class="nav-text">备注</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">3.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhaoliang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

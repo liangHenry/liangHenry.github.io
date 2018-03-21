@@ -387,7 +387,7 @@
           
             <p>本文是看《从Paxos到ZooKeeper分布式一致性原理与实践》-倪超 著。进行简单记录。</p>
 <h1 id="ACID是什么？"><a href="#ACID是什么？" class="headerlink" title="ACID是什么？"></a>ACID是什么？</h1><p>事务(Transaction) 是由一系列对系统中数据进行访问与更新的操作组成的一个程序执行逻辑单元(Unit)，狭义上的事务特指数据库事务。一方面，当多个应用程序并发访问数据库时，事务可以在这些应用程序之间提供一个隔离方法，以防止彼此的操作互相干扰。另一方面，事务为数据库操作序列提供了一个从失败中恢复到正常状态的方法，同时提供了数据库即使在异常状态下仍能保持数据一致性的方法。<br>事务具有四个特性，分别是原子性(Atomicity)、一致性(Consistency)、隔离性(Isolation)和持久性(Durability)，简称为事务对ACID特性。</p>
-<h1 id="CAP是什么？"><a href="#CAP是什么？" class="headerlink" title="CAP是什么？"></a>CAP是什么？</h1><p>C:(Consistency)：一致性，A:(Availability)：可用性，P:(Partition tolerance)分区容错性<br>一个分布式系统不可能同时满足CAP。<br><img src="//img-blog.csdn.net/20180321103027774?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L2xpYW5nX2hlbnJ5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h1 id="CAP是什么？"><a href="#CAP是什么？" class="headerlink" title="CAP是什么？"></a>CAP是什么？</h1><p>C:(Consistency)：一致性，A:(Availability)：可用性，P:(Partition tolerance)分区容错性<br>一个分布式系统不可能同时满足CAP。<br><img src="/images/CAP.png" alt="这里写图片描述"></p>
 <h2 id="定理的应用："><a href="#定理的应用：" class="headerlink" title="定理的应用："></a>定理的应用：</h2><table>
 <thead>
 <tr>
